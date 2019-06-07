@@ -1,0 +1,34 @@
+
+<form method="POST" action="/results" >
+  <input type='text' style='min-width=100%;min-height=100%;' name='search' /> 
+  <input type='submit'/>
+</form>
+
+<div>
+
+   <% @results.each do |item| %>
+
+  <!-- image with link -->
+  <a class='etsy' href="<%=item['url']%>" target="_blank">
+  <div style="max-height=200px;" class="list">
+    <img src="<%=item['Images'].first['url_570xN']%>" />
+   
+    <h2>
+       <span style='font-weight=700;'><%= item['price'] %> </span>
+      <%= item['currency']%>
+    </h2>
+     <p>Delivered in 
+      <span style='font-weight=700;'><%=item['from']%></span> to
+      <span style='font-weight=700;'><%=item['to']%></span> days
+     </p>
+      <% item["data"].each_pair do |k,v| %>
+
+     <p><%=v%></p>
+
+    <% end %>
+      </a>
+  </div>
+
+  <% end %>
+
+</div>

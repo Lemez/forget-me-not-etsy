@@ -1,0 +1,25 @@
+Old project instructions
+
+
+Parts
+1) Bday bot - one instance for each user: gets list of birthdays relevant to that user and checks dates
+	i) imports 
+	
+2) If bday within a week, triggers programme to:
+	i) find appropriate gifts suggestions
+	ii) send email with links
+
+
+Fields for app:
+Sex, Name, DOB, Address, Interests (updateable), Budget, Minor?, Email-of-parent, Email-of-partner-or-friend
+
+Real order
+1) Find suggestions by interest / random word
+2) Get confirmation of suggestions
+3) Make order
+
+Test order
+1) Get random word
+2) Search for "children " + word on hive.co.uk
+3) return results
+

@@ -1,0 +1,583 @@
+{
+  "kind": "customsearch#search",
+  "url": {
+    "type": "application\/json",
+    "template": "https:\/\/www.googleapis.com\/customsearch\/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+  },
+  "queries": {
+    "request": [
+      {
+        "title": "Google Custom Search - wordery Takeshita Demons Cristy Burne",
+        "totalResults": "5",
+        "searchTerms": "wordery Takeshita Demons Cristy Burne",
+        "count": 5,
+        "startIndex": 1,
+        "inputEncoding": "utf8",
+        "outputEncoding": "utf8",
+        "safe": "off",
+        "cx": "007890889617559609165:skfjugaf6jm"
+      }
+    ]
+  },
+  "context": {
+    "title": "Wordery"
+  },
+  "searchInformation": {
+    "searchTime": 0.134128,
+    "formattedSearchTime": "0.13",
+    "totalResults": "5",
+    "formattedTotalResults": "5"
+  },
+  "items": [
+    {
+      "kind": "customsearch#result",
+      "title": "Cristy Burne Books and Gifts | wordery.com",
+      "htmlTitle": "<b>Cristy Burne<\/b> Books and Gifts | <b>wordery<\/b>.com",
+      "link": "https:\/\/wordery.com\/cristy-burne-author",
+      "displayLink": "wordery.com",
+      "snippet": "Buy Cristy Burne books and gifts, all with free worldwide delivery. With low prices \nand ... Takeshita Demons: the Filth Licker (English, Paperback) Cristy Burne.",
+      "htmlSnippet": "Buy <b>Cristy Burne<\/b> books and gifts, all with free worldwide delivery. With low prices <br>\nand ... <b>Takeshita Demons<\/b>: the Filth Licker (English, Paperback) <b>Cristy Burne<\/b>.",
+      "cacheId": "ZBsnf_DlSycJ",
+      "formattedUrl": "https:\/\/wordery.com\/cristy-burne-author",
+      "htmlFormattedUrl": "https:\/\/<b>wordery<\/b>.com\/<b>cristy<\/b>-<b>burne<\/b>-author",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "width": "180",
+            "height": "280",
+            "src": "https:\/\/encrypted-tbn2.gstatic.com\/images?q=tbn:ANd9GcRhfmQj6-yzTCOxdVw8Ep1ewJ8Z7j2QGlP9r_wfXeylLM2GYebRwUDV-nUL"
+          }
+        ],
+        "book": [
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801364",
+            "datepublished": "2011-06-02",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons: the Filth Licker",
+            "author": "Cristy Burne"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801159",
+            "datepublished": "2010-06-03",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons",
+            "author": "Cristy Burne, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801371",
+            "datepublished": "2012-06-07",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons: Monster Matsuri",
+            "author": "Cristy Burne, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781925591743",
+            "datepublished": "2018-07-30",
+            "contributor": "Cristy Burne",
+            "name": "Off the Track",
+            "author": "Cristy Burne"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781925589399",
+            "datepublished": "2018-08-01",
+            "contributor": "Cristy Burne",
+            "name": "Zeroes and Ones",
+            "author": "Cristy Burne"
+          }
+        ],
+        "metatags": [
+          {
+            "viewport": "width=device-width, initial-scale=1.0",
+            "theme-color": "#23908C",
+            "handheldfriendly": "true",
+            "mobileoptimized": "320",
+            "format-detection": "telephone=no",
+            "msapplication-tilecolor": "#da532c",
+            "msapplication-tileimage": "\/mstile-144x144.png",
+            "og:site_name": "wordery.com",
+            "og:type": "website",
+            "og:url": "https:\/\/wordery.com\/cristy-burne-author",
+            "og:image": "\/assets\/07879f83\/img\/wordery-book-shop-square.gif",
+            "og:title": "Cristy Burne Books and Gifts",
+            "og:description": "Buy Cristy Burne books and gifts, all with free worldwide delivery. With low prices and huge savings, shop at wordery.com today.",
+            "twitter:card": "summary",
+            "twitter:site": "@wordery",
+            "twitter:creator": "@wordery"
+          }
+        ],
+        "listitem": [
+          {
+            "position": "1"
+          },
+          {
+            "url": "https:\/\/wordery.com\/cristy-burne-author",
+            "position": "2"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https:\/\/wordery.com\/jackets\/010d84ba\/m\/takeshita-demons-the-filth-licker-cristy-burne-9781847801364.jpg"
+          }
+        ],
+        "thing": [
+          {
+            "name": "Shop",
+            "url": "https:\/\/wordery.com\/"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Buy Childrens Books Online | wordery.com",
+      "htmlTitle": "Buy Childrens Books Online | <b>wordery<\/b>.com",
+      "link": "https:\/\/wordery.com\/childrens-books\/Siku-author",
+      "displayLink": "wordery.com",
+      "snippet": "Buy Childrens Books from wordery.com today with free worldwide delivery on all \nbooks!",
+      "htmlSnippet": "Buy Childrens Books from <b>wordery<\/b>.com today with free worldwide delivery on all <br>\nbooks!",
+      "cacheId": "I_iVnFJ7itUJ",
+      "formattedUrl": "https:\/\/wordery.com\/childrens-books\/Siku-author",
+      "htmlFormattedUrl": "https:\/\/<b>wordery<\/b>.com\/childrens-books\/Siku-author",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "width": "183",
+            "height": "276",
+            "src": "https:\/\/encrypted-tbn3.gstatic.com\/images?q=tbn:ANd9GcSrgTimZlKBQcaMyjHI7uu9-Z2G52fgbMaKS1LWYLUAB27WIRXycTU_HDc"
+          }
+        ],
+        "book": [
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9780385524315",
+            "datepublished": "2008-05-15",
+            "contributor": "Siku",
+            "name": "The Manga Bible",
+            "author": "Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801159",
+            "datepublished": "2010-06-03",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons",
+            "author": "Cristy Burne, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801371",
+            "datepublished": "2012-06-07",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons: Monster Matsuri",
+            "author": "Cristy Burne, Siku"
+          }
+        ],
+        "metatags": [
+          {
+            "viewport": "width=device-width, initial-scale=1.0",
+            "theme-color": "#23908C",
+            "handheldfriendly": "true",
+            "mobileoptimized": "320",
+            "format-detection": "telephone=no",
+            "msapplication-tilecolor": "#da532c",
+            "msapplication-tileimage": "\/mstile-144x144.png",
+            "og:site_name": "wordery.com",
+            "og:type": "website",
+            "og:url": "https:\/\/wordery.com\/childrens-books\/Siku-author",
+            "og:image": "\/assets\/d1445991\/img\/wordery-book-shop-square.gif",
+            "og:title": "Buy Childrens Books Online",
+            "og:description": "Buy Childrens Books from wordery.com today with free worldwide delivery on all books!",
+            "twitter:card": "summary",
+            "twitter:site": "@wordery",
+            "twitter:creator": "@wordery"
+          }
+        ],
+        "listitem": [
+          {
+            "position": "1"
+          },
+          {
+            "item": "Children's & Young Adult",
+            "name": "Children's & Young Adult",
+            "url": "https:\/\/wordery.com\/childrens-books",
+            "position": "2"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https:\/\/wordery.com\/jackets\/6f75b069\/m\/the-manga-bible-siku-9780385524315.jpg"
+          }
+        ],
+        "thing": [
+          {
+            "name": "Shop",
+            "url": "https:\/\/wordery.com\/"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Buy To the Lighthouse by Cristy Burne With Free Delivery | wordery ...",
+      "htmlTitle": "Buy To the Lighthouse by <b>Cristy Burne<\/b> With Free Delivery | <b>wordery<\/b> ...",
+      "link": "https:\/\/wordery.com\/to-the-lighthouse-cristy-burne-9781925164619",
+      "displayLink": "wordery.com",
+      "snippet": "Get FREE shipping on To the Lighthouse by Cristy Burne, from wordery.com. ... A \nPaperback edition by Cristy Burne in English (May 29, 2017). To the Lighthouse \nby ... Takeshita Demons: the Filth Licker (English, Paperback) Cristy Burne.",
+      "htmlSnippet": "Get FREE shipping on To the Lighthouse by <b>Cristy Burne<\/b>, from <b>wordery<\/b>.com. ... A <br>\nPaperback edition by <b>Cristy Burne<\/b> in English (May 29, 2017). To the Lighthouse <br>\nby ... <b>Takeshita Demons<\/b>: the Filth Licker (English, Paperback) <b>Cristy Burne<\/b>.",
+      "cacheId": "j_TiAUViye4J",
+      "formattedUrl": "https:\/\/wordery.com\/to-the-lighthouse-cristy-burne-9781925164619",
+      "htmlFormattedUrl": "https:\/\/<b>wordery<\/b>.com\/to-the-lighthouse-<b>cristy<\/b>-<b>burne<\/b>-9781925164619",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "width": "181",
+            "height": "279",
+            "src": "https:\/\/encrypted-tbn1.gstatic.com\/images?q=tbn:ANd9GcSZRpsOoW6Qy5QHnHBbd4_TjdUdnCED3bokzh21dm8Px_SwPFeFUphExf8"
+          }
+        ],
+        "book": [
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "name": "To the Lighthouse",
+            "contributor": "Cristy Burne",
+            "isbn": "9781925164619",
+            "publisher": "Fremantle Press",
+            "datepublished": "May 29, 2017",
+            "bookedition": "None ed.",
+            "numberofpages": "112"
+          }
+        ],
+        "metatags": [
+          {
+            "viewport": "width=device-width, initial-scale=1.0",
+            "theme-color": "#23908C",
+            "handheldfriendly": "true",
+            "mobileoptimized": "320",
+            "format-detection": "telephone=no",
+            "msapplication-tilecolor": "#da532c",
+            "msapplication-tileimage": "\/mstile-144x144.png",
+            "og:site_name": "wordery.com",
+            "og:type": "book",
+            "og:title": "To the Lighthouse by Cristy Burne (Paperback)",
+            "og:url": "https:\/\/wordery.com\/to-the-lighthouse-cristy-burne-9781925164619",
+            "og:image": "\/jackets\/2cf58da2\/to-the-lighthouse-cristy-burne-9781925164619.jpg",
+            "og:description": "Isaac arrives on Rottnest Island hoping for an awesome holiday adventure, but his mum would rather he stayed inside, where it's safe. Then Isaac meets Emmy. She's allowed to do whatever she wants ? an... #HappyReading",
+            "book:isbn": "9781925164619",
+            "book:release_date": "2017-05-29",
+            "book:tag": "Buy To the Lighthouse by Cristy Burne With Free Delivery,Cristy Burne,9781925164619,Paperback,Paperback",
+            "twitter:card": "product",
+            "twitter:site": "@wordery",
+            "twitter:title": "To the Lighthouse by Cristy Burne (Paperback)",
+            "twitter:description": "Isaac arrives on Rottnest Island hoping for an awesome holiday adventure, but his mum would rather he stayed inside, where it's safe. Then Isaac meets Emmy. She's allowed to do whatever she wants ? an... #HappyReading",
+            "twitter:image": "\/jackets\/2cf58da2\/to-the-lighthouse-cristy-burne-9781925164619.jpg",
+            "twitter:data1": "AVAILABILITY",
+            "twitter:label1": "Available",
+            "twitter:data2": "SHIPPING",
+            "twitter:label2": "Free Worldwide Delivery"
+          }
+        ],
+        "hproduct": [
+          {
+            "fn": "To the Lighthouse",
+            "currency": "USD",
+            "currency_iso4217": "840"
+          }
+        ],
+        "listitem": [
+          {
+            "position": "1"
+          },
+          {
+            "position": "2"
+          },
+          {
+            "position": "3"
+          },
+          {
+            "position": "4"
+          },
+          {
+            "item": "To the Lighthouse",
+            "name": "To the Lighthouse",
+            "url": "https:\/\/wordery.com\/to-the-lighthouse-cristy-burne-9781925164619",
+            "position": "5"
+          }
+        ],
+        "offer": [
+          {
+            "itemcondition": "\/\/schema.org\/NewCondition",
+            "price": "9.99",
+            "pricecurrency": "USD",
+            "availability": "\/\/schema.org\/InStock"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https:\/\/wordery.com\/jackets\/2cf58da5\/m\/to-the-lighthouse-cristy-burne-9781925164619.jpg"
+          }
+        ],
+        "thing": [
+          {
+            "name": "Shop",
+            "url": "https:\/\/wordery.com\/"
+          },
+          {
+            "name": "Children's books",
+            "url": "https:\/\/wordery.com\/childrens-books"
+          },
+          {
+            "name": "Fiction & true stories",
+            "url": "https:\/\/wordery.com\/childrens-teenage-fiction-true-stories-YF"
+          },
+          {
+            "name": "General fiction",
+            "url": "https:\/\/wordery.com\/general-fiction-childrens-teenage-YFB"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Siku Books and Gifts | wordery.com",
+      "htmlTitle": "Siku Books and Gifts | <b>wordery<\/b>.com",
+      "link": "https:\/\/wordery.com\/siku-author",
+      "displayLink": "wordery.com",
+      "snippet": "Buy Siku books and gifts, all with free worldwide delivery. With low prices and \nhuge savings, shop at wordery.com today.",
+      "htmlSnippet": "Buy Siku books and gifts, all with free worldwide delivery. With low prices and <br>\nhuge savings, shop at <b>wordery<\/b>.com today.",
+      "cacheId": "ogmGXWOHHSsJ",
+      "formattedUrl": "https:\/\/wordery.com\/siku-author",
+      "htmlFormattedUrl": "https:\/\/<b>wordery<\/b>.com\/siku-author",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "width": "183",
+            "height": "276",
+            "src": "https:\/\/encrypted-tbn3.gstatic.com\/images?q=tbn:ANd9GcSrgTimZlKBQcaMyjHI7uu9-Z2G52fgbMaKS1LWYLUAB27WIRXycTU_HDc"
+          }
+        ],
+        "book": [
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9780385524315",
+            "datepublished": "2008-05-15",
+            "contributor": "Siku",
+            "name": "The Manga Bible",
+            "author": "Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9780956973115",
+            "datepublished": "2011-10-25",
+            "contributor": "Siku",
+            "name": "Manga Bible KJV",
+            "author": "Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9780745956176",
+            "datepublished": "2015-09-10",
+            "contributor": "Jeff Anderson",
+            "name": "The Lion Comic Book Hero Bible",
+            "author": "Jeff Anderson, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781473637405",
+            "datepublished": "2016-10-20",
+            "contributor": "New International Version",
+            "name": "NIV Manga Bible",
+            "author": "New International Version, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781473637375",
+            "datepublished": "2016-09-22",
+            "contributor": "New International Version",
+            "name": "NIV Manga Bible",
+            "author": "New International Version, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801159",
+            "datepublished": "2010-06-03",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons",
+            "author": "Cristy Burne, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801371",
+            "datepublished": "2012-06-07",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons: Monster Matsuri",
+            "author": "Cristy Burne, Siku"
+          }
+        ],
+        "metatags": [
+          {
+            "viewport": "width=device-width, initial-scale=1.0",
+            "theme-color": "#23908C",
+            "handheldfriendly": "true",
+            "mobileoptimized": "320",
+            "format-detection": "telephone=no",
+            "msapplication-tilecolor": "#da532c",
+            "msapplication-tileimage": "\/mstile-144x144.png",
+            "og:site_name": "wordery.com",
+            "og:type": "website",
+            "og:url": "https:\/\/wordery.com\/siku-author",
+            "og:image": "\/assets\/095d7e1a\/img\/wordery-book-shop-square.gif",
+            "og:title": "Siku Books and Gifts",
+            "og:description": "Buy Siku books and gifts, all with free worldwide delivery. With low prices and huge savings, shop at wordery.com today.",
+            "twitter:card": "summary",
+            "twitter:site": "@wordery",
+            "twitter:creator": "@wordery"
+          }
+        ],
+        "listitem": [
+          {
+            "position": "1"
+          },
+          {
+            "url": "https:\/\/wordery.com\/siku-author",
+            "position": "2"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https:\/\/wordery.com\/jackets\/6f75b069\/m\/the-manga-bible-siku-9780385524315.jpg"
+          }
+        ],
+        "thing": [
+          {
+            "name": "Shop",
+            "url": "https:\/\/wordery.com\/"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Siku Books and Gifts | wordery.com",
+      "htmlTitle": "Siku Books and Gifts | <b>wordery<\/b>.com",
+      "link": "https:\/\/wordery.com\/siku-author?filters%5B%5D=Siku&resultsPerPage=50",
+      "displayLink": "wordery.com",
+      "snippet": "With low prices and huge savings, shop at wordery.com today. ... Takeshita \nDemons: Monster Matsuri (Paperback) Cristy Burne, Siku. Trouble is brewing \nagain ...",
+      "htmlSnippet": "With low prices and huge savings, shop at <b>wordery<\/b>.com today. ... <b>Takeshita<\/b> <br>\n<b>Demons<\/b>: Monster Matsuri (Paperback) <b>Cristy Burne<\/b>, Siku. Trouble is brewing <br>\nagain&nbsp;...",
+      "cacheId": "HcZcWUGBRIUJ",
+      "formattedUrl": "https:\/\/wordery.com\/siku-author?filters%5B%5D=Siku...50",
+      "htmlFormattedUrl": "https:\/\/<b>wordery<\/b>.com\/siku-author?filters%5B%5D=Siku...50",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "width": "183",
+            "height": "276",
+            "src": "https:\/\/encrypted-tbn3.gstatic.com\/images?q=tbn:ANd9GcSrgTimZlKBQcaMyjHI7uu9-Z2G52fgbMaKS1LWYLUAB27WIRXycTU_HDc"
+          }
+        ],
+        "book": [
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9780385524315",
+            "datepublished": "2008-05-15",
+            "contributor": "Siku",
+            "name": "The Manga Bible",
+            "author": "Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9780956973115",
+            "datepublished": "2011-10-25",
+            "contributor": "Siku",
+            "name": "Manga Bible KJV",
+            "author": "Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9780745956176",
+            "datepublished": "2015-09-10",
+            "contributor": "Jeff Anderson",
+            "name": "The Lion Comic Book Hero Bible",
+            "author": "Jeff Anderson, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781473637405",
+            "datepublished": "2016-10-20",
+            "contributor": "New International Version",
+            "name": "NIV Manga Bible",
+            "author": "New International Version, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781473637375",
+            "datepublished": "2016-09-22",
+            "contributor": "New International Version",
+            "name": "NIV Manga Bible",
+            "author": "New International Version, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801159",
+            "datepublished": "2010-06-03",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons",
+            "author": "Cristy Burne, Siku"
+          },
+          {
+            "additionaltype": "http:\/\/schema.org\/Product",
+            "isbn": "9781847801371",
+            "datepublished": "2012-06-07",
+            "contributor": "Cristy Burne",
+            "name": "Takeshita Demons: Monster Matsuri",
+            "author": "Cristy Burne, Siku"
+          }
+        ],
+        "metatags": [
+          {
+            "viewport": "width=device-width, initial-scale=1.0",
+            "theme-color": "#23908C",
+            "handheldfriendly": "true",
+            "mobileoptimized": "320",
+            "format-detection": "telephone=no",
+            "msapplication-tilecolor": "#da532c",
+            "msapplication-tileimage": "\/mstile-144x144.png",
+            "og:site_name": "wordery.com",
+            "og:type": "website",
+            "og:url": "https:\/\/wordery.com\/siku-author?filters%5B0%5D=Siku",
+            "og:image": "\/assets\/68e25ee6\/img\/wordery-book-shop-square.gif",
+            "og:title": "Siku Books and Gifts",
+            "og:description": "Buy Siku books and gifts, all with free worldwide delivery. With low prices and huge savings, shop at wordery.com today.",
+            "twitter:card": "summary",
+            "twitter:site": "@wordery",
+            "twitter:creator": "@wordery"
+          }
+        ],
+        "listitem": [
+          {
+            "position": "1"
+          },
+          {
+            "url": "https:\/\/wordery.com\/siku-author",
+            "position": "2"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https:\/\/wordery.com\/jackets\/6f75b069\/m\/the-manga-bible-siku-9780385524315.jpg"
+          }
+        ],
+        "thing": [
+          {
+            "name": "Shop",
+            "url": "https:\/\/wordery.com\/"
+          }
+        ]
+      }
+    }
+  ]
+}

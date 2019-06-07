@@ -1,0 +1,46 @@
+
+<div class='wrapper no-overflow'>
+    <div class='sidebar'>
+       <% @friends.each_with_index do |friend,i| %>
+        <a href='#<%=friend.firstname%> <%=friend.lastname%>'>
+          <% if i===0 %>
+            <div class='sidebar-item active'>
+          <% else %>
+            <div class='sidebar-item'>
+          <% end %>
+          <%=friend.firstname%> <%=friend.lastname%>
+          </div>
+        </a>
+        <% end %>
+
+    </div>
+    <div class='friends-wrapper'>
+      <% @letter = '' %>
+
+      <% @friends.each do |friend| %>
+
+        <% if not friend.lastname[0]==@letter %>
+         <% @letter = friend.lastname[0] %>
+           <h2 class='w3-flat-belize-hole'><%=@letter%></h2>
+        <% end %>
+        
+        <div id='<%=friend.firstname%> <%=friend.lastname%>' class='friend'>
+         
+            <div  class='box'><%= friend.firstname%></div>
+            <div class='box'><%= friend.lastname%></div>
+            <div class='box'><%= friend.birthday.strftime('%-d %b %Y').to_s%></div>
+            <div class='box'>
+              <% friend.keywords.each do |word| %>
+               <a href="/recommendations/<%=friend.id%>/<%= word %>"> 
+                 <span class='element'><%= word %> </span>
+               </a>
+              <% end %>
+              <button class='w3-button w3-circle w3-large w3-teal add_button'>+</button>
+         
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+</div>
+

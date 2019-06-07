@@ -10,8 +10,8 @@
 
   <!-- image with link -->
   <a class='etsy' href="<%=item['url']%>" target="_blank">
-  <div style="max-height=200px;" class="list">
-    <img src="<%=item['Images'].first['url_570xN']%>" />
+  <div class="list">
+    <img class='img_result' src="<%=item['Images'].first['url_570xN']%>" />
    
     <h2>
        <span style='font-weight=700;'><%= item['price'] %> </span>

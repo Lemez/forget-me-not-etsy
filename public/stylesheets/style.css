@@ -74,6 +74,10 @@ input {
   padding: 2vw;
 }
 
+.img_result {
+  max-height: 150px !important;
+}
+
 a.etsy {
   text-decoration: none;
   color: inherit;

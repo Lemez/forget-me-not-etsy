@@ -29,6 +29,11 @@
   color: white !important;
 }
 
+img {
+    max-width:100%;
+    height:auto;
+}
+
 img.icon {
   width: 20px;
   height: 25px;

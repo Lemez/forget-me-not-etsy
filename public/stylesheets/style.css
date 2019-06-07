@@ -8,14 +8,16 @@ html *
 }
 
 h2 {
-  color: blue;
+/*  color: blue;*/
 }
 
 form {
-  position: fixed;
-  height:50px;
-  margin-left:25vw;
-  margin-top: -50px;
+  margin-top: 8px;
+}
+
+form.search {
+  float: right;
+  margin-right: 10px;
 }
 
 input {
@@ -67,15 +69,17 @@ input {
 }
 
 .list {
-  border-bottom: 2px solid black;
-  border-top: 2px solid black;
-  border-left: 1px sold charcoal;
+  border-bottom: 2px solid #7f8c8d;
+  border-left: 5px solid #f1c40f;
   flex-wrap: wrap;
-  padding: 2vw;
+  padding: 1vw;
+  max-height: 80vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .img_result {
-  max-height: 150px !important;
+  width: 200px !important;
 }
 
 a.etsy {

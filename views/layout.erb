@@ -18,6 +18,13 @@
   <a href="/add">Add</a>
   <a href="/results">Etsy</a>
 
+  <% if defined? @searchbar %>
+    <form class='search'method="POST" action="/results" >
+      <input type='text' style='min-width=100%;min-height=100%;' name='search' /> 
+      <input type='submit'/>
+    </form>
+  <% end %>
+
 
 </div>
 <div class='notnav'>

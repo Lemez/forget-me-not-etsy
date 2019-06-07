@@ -7,6 +7,7 @@ require 'sinatra/activerecord'
   set :logging, true
   
 class App < Sinatra::Base
+
   get '/' do
     @friends = Friend.order('lastname, firstname')
      erb :friends, :locals => {:friends => @friends}
@@ -25,17 +26,28 @@ class App < Sinatra::Base
   end
 
   get '/results' do
-    @results = etsy_q
+    @searchbar = true 
+    @results = init_etsy({})
     erb :results, :locals => {:results => @results}
   end
 
   get '/recommendations/:id/:word' do
-    @results = etsy_q({:tags=>params[:word]})
+    @searchbar = true 
+    if Friend.find_by(id:params[:id]).age <= 18
+      keyword= params[:word] + ' funny'
+      p ":Under 18"
+
+    else
+      keyword= params[:word] +' independent'
+      p ":Older than 18"
+    end
+    @results = init_etsy({:tags=>keyword})
     erb :results, :locals => {:results => @results}
   end
 
   post '/results' do
-    @results = etsy_q({:tags=>params[:search]})
+    @searchbar = true 
+    @results = init_etsy({:tags=>params[:search]})
     p params
     erb :results, :locals => {:results => @results}
   end

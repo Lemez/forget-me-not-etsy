@@ -23,11 +23,16 @@
          <% @letter = friend.lastname[0] %>
            <h2 class='w3-flat-belize-hole'><%=@letter%></h2>
         <% end %>
+
+        <% @important = 'hide' %>
+        <% @important = 'significant' if friend.significant? %>
+        <% @colour = 'highlight' if friend.significant? %>
         
-        <div id='<%=friend.firstname%> <%=friend.lastname%>' class='friend'>
+        <div id='<%=friend.firstname%> <%=friend.lastname%>' class='friend <%=@colour %>'>
          
-            <div  class='box'><%= friend.firstname%></div>
+            <div class='box'><%= friend.firstname%></div>
             <div class='box'><%= friend.lastname%></div>
+            <div class='box'><span><%= friend.age %> </span><span class='<%=@important %>'> *</span></div>
             <div class='box'><%= friend.birthday.strftime('%-d %b %Y').to_s%></div>
             <div class='box'>
               <% friend.keywords.each do |word| %>

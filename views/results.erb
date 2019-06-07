@@ -4,13 +4,14 @@
   <input type='submit'/>
 </form>
 
-<div>
+<div class='results-wrapper'>
 
    <% @results.each do |item| %>
 
   <!-- image with link -->
-  <a class='etsy' href="<%=item['url']%>" target="_blank">
   <div class="list">
+  <a class='etsy' href="<%=item['url']%>" target="_blank">
+  
     <img class='img_result' src="<%=item['Images'].first['url_570xN']%>" />
    
     <h2>

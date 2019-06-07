@@ -45,7 +45,7 @@ input {
   color: #123;
   border-radius: 5px;
   border: 1px solid black;
-  padding: 5px;
+  padding: 5px 5px 5px 10px;
   font-size: 150%;
 }
 
@@ -85,6 +85,25 @@ a.etsy {
 
 a.etsy:hover{
   background-color: rgba(0,0,0,0.1);
+}
+
+.significant{
+  font-size: 2em;
+  color: rgba(210, 82, 127, 0.5);
+}
+
+.hide {
+  display: none;
+}
+
+.highlight {
+  border-bottom: 5px solid rgba(210, 82, 127, 0.5) !important;
+}
+
+.results-wrapper{
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .sidebar {

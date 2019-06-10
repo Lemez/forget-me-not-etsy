@@ -12,9 +12,6 @@ rerun -- rackup --port 4567 config.ru
 Sinatra (wo reloading)
 ruby app.rb
 
-
-
-
 Script only
 ruby main.rb
 ruby -r "./main.rb" -e "etsy_q"
@@ -30,8 +27,8 @@ Server
 3. Queries Etsy API with Keywords, Budget >> Desc, Image, Cost, Url
 
 Etsy query: if no results from /listings/, then 
-
-# refuse duplicates
+# compare images to refuse duplicates
+    <!-- https://github.com/Nakilon/dhash-vips -->
 
 4. Get appropriate books from booklist
 

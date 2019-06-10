@@ -13,7 +13,10 @@ gem 'sqlite3'
 gem 'rake'
 gem 'pg'
 gem 'thin'
+gem 'oauth2'
+gem 'spidr' #crawling
+gem 'upton' #scraping
 
 group :development do
-gem "tux"
+  gem "tux"
 end

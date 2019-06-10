@@ -2,7 +2,7 @@ require_relative './main'
 require 'sinatra'
 require 'sinatra/activerecord'
 
-  set :database, "sqlite3:project-name.sqlite3"
+  set :database_file, "config/database.yml"
   set :server, "thin"
   set :logging, true
   
@@ -33,14 +33,15 @@ class App < Sinatra::Base
 
   get '/recommendations/:id/:word' do
     @searchbar = true 
-    if Friend.find_by(id:params[:id]).age <= 18
-      keyword= params[:word] + ' funny'
-      p ":Under 18"
+    keyword = params[:word]
+    # if Friend.find_by(id:params[:id]).age <= 18
+    #   keyword= params[:word] + ' funny'
+    #   p ":Under 18"
 
-    else
-      keyword= params[:word] +' independent'
-      p ":Older than 18"
-    end
+    # else
+    #   keyword= params[:word] +' independent'
+    #   p ":Older than 18"
+    # end
     @results = init_etsy({:tags=>keyword})
     erb :results, :locals => {:results => @results}
   end

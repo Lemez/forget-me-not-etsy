@@ -15,6 +15,7 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
+    awesome_print (1.8.0)
     bond (0.5.1)
     capybara (3.15.1)
       addressable
@@ -142,6 +143,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  awesome_print
   capybara
   etsy
   excon

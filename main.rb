@@ -14,6 +14,9 @@ require 'nokogiri'
 require 'oauth2'
 require 'spidr'
 require 'upton'
+require "awesome_print"
+require 'csv'
+# require 'deviner'
 
 include Capybara::DSL
 Capybara.default_driver = :poltergeist
@@ -30,11 +33,14 @@ Capybara.ignore_hidden_elements = true
 def main
   # site_scrape({:dom=>'https://secondrundvd.ecwid.com/#!/c/0/'})
   
-  # name = "Second Run"
   # name = "Pops & Ozzy"
   # name = "Anorak"
   # name = "Novalia"
-  name = 'Tate Books'
+  # name = 'Tate Gifts'
+  # name = 'Tate Books'
+  # name = 'Tate Homeware'
+  name = 'Tate'
+
 
   shop = STORES[name]
 

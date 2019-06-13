@@ -16,7 +16,9 @@ gem 'thin'
 gem 'oauth2'
 gem 'spidr' #crawling
 gem 'upton' #scraping
+gem 'diviner', '~> 0.2.1' #product categorising
 
 group :development do
   gem "tux"
+  gem "awesome_print"
 end

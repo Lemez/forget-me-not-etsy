@@ -21,7 +21,7 @@ def search_scrape(opts={:name=>nil})
     results = scrape_salesforce(shop)
   end
     
-  print_scrape_results(results)
+  write_to(results, {:format=>'json'}) # or 'csv' or 'print'
 
 end
 

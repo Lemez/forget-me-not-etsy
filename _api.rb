@@ -27,7 +27,7 @@ def big_cartel_q(shop)
                   :image => item['images'].first['url'],
                   :soldout => item['options'].first['sold_out'],
                   :description => item['description'],
-                  :categories => item['categories']
+                  :categories => item['categories'].map{|x|x['name']}
                 }
 
   end

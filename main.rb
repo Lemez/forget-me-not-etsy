@@ -31,8 +31,11 @@ def main
   # site_scrape({:dom=>'https://secondrundvd.ecwid.com/#!/c/0/'})
   
   # name = "Second Run"
-   name = "Pops & Ozzy"
+  # name = "Pops & Ozzy"
   # name = "Anorak"
+  # name = "Novalia"
+  name = 'Tate Books'
+
   shop = STORES[name]
 
   if shop[:searchable]
@@ -40,7 +43,7 @@ def main
       search_scrape({:name=>name,:word=>word})
     end
   else
-    search_scrape({:name=>name})
+    search_scrape({:name=>name,:word=>""})
   end
 
 

@@ -1,28 +1,35 @@
 require_relative ('./_scrape_stores')
 
-def search_scrape(opts={:name=>nil})
+def search_scrape(opts={:name=>nil, :word=>nil})
 
   shop = STORES[opts[:name]]
-  shop[:word]=opts[:word]
+  p opts
+  shop[:opts] = opts
 
-  shop[:url] = shop[:searchable] ? "#{shop[:base_url]}#{shop[:search_string]}#{shop[:word]}" : shop[:base_url]
+  shop[:url] = shop[:word].nil? ? shop[:base_url] : "#{shop[:base_url]}#{shop[:search_string]}#{shop[:word]}" 
   shop[:results] = {:page=>1, :data=>[]}
   shop[:incomplete]=true
 
-  if shop[:provider]=='shopify'
+  case shop[:provider]
+  when 'shopify'
     results = scrape_shopify(shop) # working for Pops & Ozzy
-  elsif shop[:provider]=='wordpress_ecwid'
+  when 'wordpress_ecwid'
     results = scrape_wordpress_ecwid(shop) #needs phantom headless :js (wait etc)
-  elsif shop[:provider]=='bigcartel'
-    results = big_cartel_q(shop)
-  elsif shop[:provider]=='wordpress_woocommerce'
-    results = scrape_wordpress_woocommerce(shop)
-   elsif shop[:provider]=='salesforce'
-    results = scrape_salesforce(shop)
+  when 'bigcartel'
+    results = big_cartel_q(shop) # Anorak
+  when 'wordpress_woocommerce'
+    results = scrape_wordpress_woocommerce(shop) #Novalis
+  when 'salesforce'
+    results = scrape_salesforce(shop) #Tate
+  when 'amazon'
+    results = scrape_amazon(shop) #ZSL
+  when 'magento'
+    results = scrape_magento(shop) #Kew
   end
     
-  write_to(results, {:format=>'json'}) # or 'csv' or 'print'
-
+  # write_to(results, {:format=>'json'}) # or 'csv' or 'print'
+  # results = opts[:options][:web] ? results : results.to_json
+  results
 end
 
 

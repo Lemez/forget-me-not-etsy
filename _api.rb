@@ -56,6 +56,7 @@ end
 
 BASE_URL = "https://openapi.etsy.com/v2/listings/active?api_key=#{KEYSTRING}&limit=20&includes=Images:1&sort_on=price"
 
+
 def init_etsy(opts)
   $tries = 0
   # begin
@@ -135,11 +136,12 @@ def  parse_results(results,opts,fields_to_save)
     currency = item['currency_code']
     listing = {
        "Images"=>images,
-       "url"=>item['url'],
+       "link"=>item['url'],
        'from'=>proc_min,
        'to'=>proc_max,
        'price'=>price,
        'currency'=>currency,
+       'shop'=>'Etsy',
        "data"=>{}
     }
 

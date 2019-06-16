@@ -27,7 +27,12 @@ class App < Sinatra::Base
 
   get '/results' do
     @searchbar = true 
-    @results = init_etsy({})
+
+    @results = query(opts={:shop=>params[:shop], :web=>true})
+    @current = params[:shop] 
+
+    p @results.first if not @results.nil?
+
     erb :results, :locals => {:results => @results}
   end
 
@@ -47,9 +52,11 @@ class App < Sinatra::Base
   end
 
   post '/results' do
-    @searchbar = true 
-    @results = init_etsy({:tags=>params[:search]})
     p params
+    @searchbar = true 
+    @results = query(opts={:tags=>params[:search], :shop=>params[:shop], :web=>true})
+    @current = params[:shop] 
+    
     erb :results, :locals => {:results => @results}
   end
 

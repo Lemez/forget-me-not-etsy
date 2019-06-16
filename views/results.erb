@@ -1,32 +1,46 @@
 
+  <div class='results-wrapper'>
 
+     <% @results.each do |item| %>
 
-<div class='results-wrapper'>
+      <% if item['shop'] == 'Etsy' %>
+        <% @image = item['Images'].first['url_570xN']%>
+        <% @link = item['link'] %>
+        <% @price = item['price'] %>
+      <% else %>
+         <% @image = item[:image] %>
+         <% @link = item[:link] %>
+         <% @price = item[:price] %>
+      <% end %>
+    <!-- image with link -->
+    <div class="list">
+    <a class='results' href="<%=@link%>" target="_blank">
 
-   <% @results.each do |item| %>
+    
 
-  <!-- image with link -->
-  <div class="list">
-  <a class='etsy' href="<%=item['url']%>" target="_blank">
-  
-    <img class='img_result' src="<%=item['Images'].first['url_570xN']%>" />
-   
-    <h2>
-       <span style='font-weight=700;'><%= item['price'] %> </span>
-      <%= item['currency']%>
-    </h2>
-     <p>Delivered in 
-      <span style='font-weight=700;'><%=item['from']%></span> to
-      <span style='font-weight=700;'><%=item['to']%></span> days
-     </p>
-      <% item["data"].each_pair do |k,v| %>
+      <img class='img_result' src="<%=@image%>" />
+     
+      <h2>
+         <span style='font-weight=700;'><%= @price %> </span>
+        <%= item['currency']%>
+      </h2>
+       <% if item['shop'] == 'Etsy' %>
+         <p>Delivered in 
+          <span style='font-weight=700;'><%=item['from']%></span> to
+          <span style='font-weight=700;'><%=item['to']%></span> days
+         </p>
+       <% end %>
 
-     <p><%=v%></p>
+       <% if item['shop'] == 'Etsy' %>
+          <% item["data"].each_pair do |k,v| %>
+              <p><%=v%></p>
+          <% end %>
+        <% else %>
+          <p><%=item[:title]%></p>  
+        <% end %>
 
+        </a>
+    </div>
     <% end %>
-      </a>
   </div>
 
-  <% end %>
-
-</div>

@@ -55,7 +55,19 @@ def main
 
 end
 
+def query(opts={:shop=>nil, :tags=>nil, :web=>true})
 
+  name = opts[:shop]
+  word = opts[:tags].nil? ? "" : opts[:tags]
+
+  if name=='Etsy'
+    @data = init_etsy(opts) 
+  else
+    @data = search_scrape({:name=>name,:word=>word,:web=>opts[:web]})
+  end
+
+  @data
+end
 
 
 def test_pushkin

@@ -68,10 +68,14 @@ STORES = {
                     :main_keyword => 'book',
                     :base_url => "https://shop.tate.org.uk/books/view-all-books",
                     :link_base_url=> "https://shop.tate.org.uk",
+                    :search_base_url=> "https://shop.tate.org.uk/search?q=",
                     :keywords => %w(print poster art exhibition kids clothes card cushion shirt gifts homeware books),
                     :search_string =>"search?q=",
                     :results_size_string => "sz=",
                     :results_size=> 100,
+                    :min_price_string=>'pmin',
+                    :max_price_string=>'pmax',
+                    :price_format=>  "%0.02f", #sprintf( "%0.02f", 123.4564564)
                     :page_string =>"&start=", #any multiple of 100
                     :searchable => false,
                     :js=>false,
@@ -85,10 +89,14 @@ STORES = {
                     :name => "Tate Gifts",
                     :base_url => "https://shop.tate.org.uk/gifts/view-all-gifts",
                     :link_base_url=> "https://shop.tate.org.uk",
+                    :search_base_url=> "https://shop.tate.org.uk/search?q=",
                     :keywords => %w(print poster art exhibition kids clothes card cushion shirt books homeware),
                     :search_string =>"search?q=",
                     :results_size_string => "sz=",
                     :results_size=> 100,
+                    :min_price_string=>'pmin',
+                    :max_price_string=>'pmax',
+                    :price_format=>  "%0.02f", #sprintf( "%0.02f", 123.4564564)
                     :page_string =>"&start=", #any multiple of 100
                     :searchable => false,
                     :js=>false,
@@ -102,10 +110,14 @@ STORES = {
                     :main_keyword => 'homeware',
                     :base_url => "https://shop.tate.org.uk/homeware/view-all-homeware",
                     :link_base_url=> "https://shop.tate.org.uk",
+                    :search_base_url=> "https://shop.tate.org.uk/search?q=",
                     :keywords => %w(print poster art exhibition kids clothes card cushion shirt gifts),
                     :search_string =>"search?q=",
                     :results_size_string => "sz=",
                     :results_size=> 100,
+                    :min_price_string=>'pmin',
+                    :max_price_string=>'pmax',
+                    :price_format=>  "%0.02f", #sprintf( "%0.02f", 123.4564564)
                     :page_string =>"&start=", #any multiple of 100
                     :searchable => false,
                     :js=>false,
@@ -121,16 +133,54 @@ STORES = {
                     :link_base_url=> "https://shop.tate.org.uk",
                     :keywords => %w(poster painting print exhibition child clothes card cushion shirt),
                     :search_string =>"search?q=",
+                    :search_base_url=> "https://shop.tate.org.uk/search?q=",
                     :results_size_string => "&sz=",
-                    :results_size=> 100,
+                    :results_size=> 100,  
+                    :min_price_string=>'pmin',
+                    :max_price_string=>'pmax',
+                    :price_format=>  "%0.02f", #sprintf( "%0.02f", 123.4564564)
                     :page_string =>"&start=", #any multiple of 100
                     :searchable => true,
                     :js=>false,
                     :api=> false
-   
   },
 
+  # https://shop.zsl.org/product-search?title=mug
+  # https://shop.zsl.org/search?field_product_recipient_tid=All&field_price_range_tid=All&field_product_animal_tid=All&field_product_category_tid=All&page=2
 
+ "Kew Gardens" =>    {:age=>0..99,
+                    :provider=>'magento',
+                    :book => false,
+                    :name => "Kew Gardens",
+                    :main_keyword => 'nature',
+                    :base_url => "https://shop.kew.org",
+                    :link_base_url=> "https://shop.kew.org",
+                    :keywords => %w(flower tree garden plant home),
+                    :search_string =>"/?q=",
+                    :initial_url => "https://shop.kew.org/gift-ideas?limit=all",
+                    :search_base_url=> "https://shop.kew.org/catalogsearch/result/index/?limit=all&q=",
+                    :page_string =>"", #any multiple of 100
+                    :max_tries => 5,
+                    :searchable => true,
+                    :js=>false,
+                    :api=> false
+  },
+ "ZSL London Zoo" =>    {:age=>0..99,
+                    :provider=>'amazon',
+                    :book => false,
+                    :name => "London Zoo",
+                    :main_keyword => 'wildlife',
+                    :base_url => "https://shop.zsl.org",
+                    :link_base_url=> "https://shop.zsl.org",
+                    :keywords => %w(animal environment shirt kids),
+                    :search_string =>"/product-search?title=",
+                    :search_base_url=> "https://shop.zsl.org/product-search?title=",
+                    :page_string =>"&page=", #any multiple of 100
+                    :max_tries => 5,
+                    :searchable => true,
+                    :js=>false,
+                    :api=> false
+  },
 
   "Second Run"=>  {:age=>16..99,
                   :provider=>'wordpress_ecwid',

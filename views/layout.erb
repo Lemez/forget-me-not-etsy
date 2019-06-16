@@ -11,15 +11,37 @@
 
 <body>
   <div class="topnav">
-
+    <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/add">Add</a></li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">?</a>
+      <div class="dropdown-content">
+        <a href="/results?shop=Etsy">Etsy</a>
+        <a href="/results?shop=ZSL London Zoo">Zoo</a>
+        <a href="/results?shop=Kew Gardens">Kew</a>
+        <a href="/results?shop=Tate">Tate</a>
+        <a href="/results?shop=Tate Books">Tate Books</a>
+        <a href="/results?shop=Tate Gifts">Tate Gifts</a>
+        <a href="/results?shop=Tate Homeware">Tate Homeware</a>
+      </div>
+    </li>
+     <% if defined? @current %>
+     <h1 class='shop'><%=@current%></h1>   
+  <% end %>
+  </ul>
+    
+<!-- 
   <a class="active" href="/">
-   <!--  <img class='icon' src='/img/noun_Forget Me Not_2194920.png' />  -->
+    <img class='icon' src='/img/noun_Forget Me Not_2194920.png' /> 
     Friends</a>
   <a href="/add">Add</a>
-  <a href="/results">Etsy</a>
-
+  <a href="/results">Find</a>
+  -->
+ 
   <% if defined? @searchbar %>
-    <form class='search'method="POST" action="/results" >
+
+    <form class='search' method="POST" action="/results?shop=<%=@current%>" >
       <input type='text' style='min-width=100%;min-height=100%;' name='search' /> 
       <input type='submit'/>
     </form>

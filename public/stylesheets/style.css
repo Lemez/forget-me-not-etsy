@@ -70,24 +70,24 @@ input {
 
 .list {
   border-bottom: 2px solid #7f8c8d;
-  border-left: 5px solid #f1c40f;
+/*  border-left: 5px solid #f1c40f;
   flex-wrap: wrap;
   padding: 1vw;
   max-height: 80vh;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: hidden;*/
 }
 
 .img_result {
-  width: 200px !important;
+  width: 300px !important;
 }
 
-a.etsy {
-  text-decoration: none;
+a, a + * {
+  text-decoration: none !important;
   color: inherit;
 }
 
-a.etsy:hover{
+a.results:hover{
   background-color: rgba(0,0,0,0.1);
 }
 
@@ -104,7 +104,7 @@ a.etsy:hover{
   border-bottom: 5px solid rgba(210, 82, 127, 0.5) !important;
 }
 
-.results-wrapper{
+.results-wrapper {
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

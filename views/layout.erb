@@ -15,20 +15,83 @@
     <li><a href="/">Home</a></li>
     <li><a href="/add">Add</a></li>
     <li class="dropdown">
-      <a href="javascript:void(0)" class="dropbtn">?</a>
+
+ <!--          <li class='main_button'> ?
+      <ul>
+        <li>A</li>
+        <li>B</li>
+        <li>C
+          <ul>
+            <li class='sub'>c</li>
+            <li class='sub'>cc</li>
+          </ul>
+        </li>
+      </ul>
+    </li> -->
+      <a href="javascript:void(0)" class="dropbtn">Shop</a>
       <div class="dropdown-content">
-        <a href="/results?shop=Etsy">Etsy</a>
-        <a href="/results?shop=ZSL London Zoo">Zoo</a>
-        <a href="/results?shop=Kew Gardens">Kew</a>
-        <a href="/results?shop=Tate">Tate</a>
+         <a href="/results?shop=V and A Fashion">V+A Fashion</a>
+        <a href="/results?q=pooh&shop=V and A Pooh">Pooh</a>
+       
+        <!-- <a href="/results?shop=Kew Gardens">Kew</a> -->
+        <a href="/results?shop=Kew Books">Kew Books</a>
         <a href="/results?shop=Tate Books">Tate Books</a>
+        
+        <a href="/results?shop=Kew Gifts">Kew Gifts</a>
         <a href="/results?shop=Tate Gifts">Tate Gifts</a>
-        <a href="/results?shop=Tate Homeware">Tate Homeware</a>
+        
+        
+        <!-- <a href="/results?shop=Tate">Tate</a> -->
+        
+        <a href="/results?shop=Kew Homeware">Kew Home</a>
+        <a href="/results?shop=Tate Homeware">Tate Home</a>
+        <a href="/results?shop=V and A Home">V+A Home</a>
+
+         <a href="/results?shop=Etsy">Etsy</a>
+         <a href="/results?shop=Kew Food">Kew Food</a>
+        <a href="/results?shop=ZSL London Zoo">London Zoo</a>
+        
       </div>
     </li>
+    <li class="dropdown">
+
+ <!--          <li class='main_button'> ?
+      <ul>
+        <li>A</li>
+        <li>B</li>
+        <li>C
+          <ul>
+            <li class='sub'>c</li>
+            <li class='sub'>cc</li>
+          </ul>
+        </li>
+      </ul>
+    </li> -->
+      <a href="javascript:void(0)" class="dropbtn">Item</a>
+      <div class="dropdown-content">
+         <a href="/results?by_item=true&q=shirt">Shirt</a>
+         <a href="/results?by_item=true&q=kids">Kids</a>
+         <a href="/results?by_item=true&q=toy">Toys</a>
+        
+        
+      </div>
+    </li>
+
+     
+     <% if defined? @shops %>
+        <% @shops.each do |shop| %>
+          <a class='jump_to_shop' href='#<%=shop%>'><%=shop%></a>
+        <% end %>
+     <% end %>
+
      <% if defined? @current %>
-     <h1 class='shop'><%=@current%></h1>   
-  <% end %>
+      <h1 class='shop'>
+        <%=@current%>
+        <% if defined? @total %>
+            <span class='total'>(<%=@total%>)</span>
+         <% end %>
+      </h1>   
+    <% end %>
   </ul>
     
 <!-- 

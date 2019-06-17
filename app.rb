@@ -26,12 +26,16 @@ class App < Sinatra::Base
   end
 
   get '/results' do
-    @searchbar = true 
+     
 
-    @results = query(opts={:shop=>params[:shop], :web=>true})
+    @results = query(opts={:shop=>params[:shop], :web=>true, :tags => params[:q], :by_item=>params[:by_item]})
     @current = params[:shop] 
+    @total = @results.size
 
     p @results.first if not @results.nil?
+
+    @shops = params[:by_item] ? @results.map{|x|x[:shop]}.uniq : nil
+    @searchbar = params[:by_item] ? false : true
 
     erb :results, :locals => {:results => @results}
   end
@@ -54,8 +58,9 @@ class App < Sinatra::Base
   post '/results' do
     p params
     @searchbar = true 
-    @results = query(opts={:tags=>params[:search], :shop=>params[:shop], :web=>true})
+    @results = query(opts={:tags=>params[:search], :shop=>params[:shop], :web=>true, :search=>true})
     @current = params[:shop] 
+    @total = @results.size
     
     erb :results, :locals => {:results => @results}
   end

@@ -1,12 +1,15 @@
 require_relative ('./_scrape_stores')
 
-def search_scrape(opts={:name=>nil, :word=>nil})
+def search_scrape(opts={:name=>nil, :word=>nil, :search=>false})
 
   shop = STORES[opts[:name]]
   p opts
   shop[:opts] = opts
 
-  shop[:url] = shop[:word].nil? ? shop[:base_url] : "#{shop[:base_url]}#{shop[:search_string]}#{shop[:word]}" 
+  shop[:opts][:word]= shop[:standalone] ? "" : $word 
+  shop[:url] = (shop[:opts][:word].nil? || shop[:opts][:word].empty?) ? shop[:base_url] : "#{shop[:base_url]}#{shop[:search_string]}#{shop[:opts][:word]}" 
+  p shop[:url]
+  
   shop[:results] = {:page=>1, :data=>[]}
   shop[:incomplete]=true
 
@@ -24,7 +27,7 @@ def search_scrape(opts={:name=>nil, :word=>nil})
   when 'amazon'
     results = scrape_amazon(shop) #ZSL
   when 'magento'
-    results = scrape_magento(shop) #Kew
+    results = scrape_magento(shop) #Kew / V+A
   end
     
   # write_to(results, {:format=>'json'}) # or 'csv' or 'print'

@@ -1,9 +1,7 @@
 tux
 to access db
 
-
 Sinatra (w reloading)
-
 rerun app.rb
 
 (Using heroku config.ru)
@@ -15,6 +13,11 @@ ruby app.rb
 Script only
 ruby main.rb
 ruby -r "./main.rb" -e "etsy_q"
+
+
+# to do
+1. Save Products, including last_updated field
+
 
 Pseudocode (May 2019)
 - log in

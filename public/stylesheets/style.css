@@ -5,6 +5,7 @@ html *
    /*font-size: 1em !important;*/
    /*color: #000 !important;*/
    font-family: Georgia !important;
+   scroll-behavior: smooth  !important;
 }
 
 h2 {
@@ -78,8 +79,14 @@ input {
   overflow-x: hidden;*/
 }
 
+.newlist:before {
+  content: '\a';
+  white-space: pre;
+}
+
 .img_result {
-  width: 300px !important;
+  max-width: 250px !important;
+  max-height: 300px;
 }
 
 a, a + * {
@@ -164,6 +171,11 @@ a.results:hover{
  background-color: rgba(230, 126, 34,1);
 
 color: white !important;
+}
+
+img.results-icon {
+  width: 50px;
+  border-radius: 50%;
 }
 
 

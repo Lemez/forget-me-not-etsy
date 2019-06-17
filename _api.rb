@@ -21,14 +21,18 @@ def big_cartel_q(shop)
   results = []
   info.each do |item|
 
+   price = "£" + sprintf('%.2f',item['price']).to_s
+
+
       results << {:title => item['name'],
-                  :price => item['price'],
+                  :price => price,
                   :link =>  shop[:link_base_url] + item['url'],
                   :image => item['images'].first['url'],
                   :soldout => item['options'].first['sold_out'],
                   :description => item['description'],
                   :has_description => true,
-                  :categories => item['categories'].map{|x|x['name']}
+                  :categories => item['categories'].map{|x|x['name']},
+                  :shop=>shop[:name]
                 }
 
   end

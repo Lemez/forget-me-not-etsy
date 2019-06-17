@@ -2,6 +2,7 @@ require_relative './secret'
 require_relative './_api'
 require_relative './_file'
 require_relative './_scrape'
+require_relative './_search'
 require_relative './_sources'
 require 'httparty'
 require 'excon'
@@ -55,15 +56,24 @@ def main
 
 end
 
-def query(opts={:shop=>nil, :tags=>nil, :web=>true})
+def query(opts={:shop=>nil, :tags=>nil, :web=>true, :search=>false,:by_item=>false})
+  p "query"
 
-  name = opts[:shop]
-  word = opts[:tags].nil? ? "" : opts[:tags]
+  searchtype = opts[:by_item] ? 'item' : 'shop'
+  $word = !(opts[:tags].nil? || opts[:tags].empty?) ? opts[:tags] : ""
+  @name = opts[:shop]
 
-  if name=='Etsy'
-    @data = init_etsy(opts) 
-  else
-    @data = search_scrape({:name=>name,:word=>word,:web=>opts[:web]})
+  case searchtype
+  when 'shop'
+    
+    if name=='Etsy'
+      @data = init_etsy(opts) 
+    else
+      @data = search_scrape({:name=>@name,:word=>$word,:web=>opts[:web], :search=>opts[:search]})
+    end
+
+  when 'item'
+     @data = search_by_item({:name=>@name,:word=>$word,:web=>opts[:web], :search=>true})
   end
 
   @data

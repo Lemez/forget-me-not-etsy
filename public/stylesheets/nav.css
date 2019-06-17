@@ -1,9 +1,9 @@
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.4);
   /*overflow: hidden;*/
-  position: fixed;
+  /*position: fixed;*/
   top: 0;
   min-width: 100vw;
 }
@@ -27,15 +27,19 @@
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #4CAF50;
-  color: white !important;
+  /*background-color: #4CAF50;*/
+  /*color: white !important;*/
 }
 
-img {
+.total {
+  font-size: 0.7em;
+}
+
+/*img {
     max-width:100%;
     height:auto;
 }
-
+*/
 img.icon {
   width: 20px;
   height: 25px;
@@ -44,6 +48,7 @@ img.icon {
 h1.shop {
   color: white;
   float: right;
+  margin-right: 2vw;
 }
 
 
@@ -52,7 +57,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  /*background-color: #333;*/
 }
 
 li {
@@ -61,7 +66,7 @@ li {
 
 li a, .dropbtn {
   display: inline-block;
-  color: white;
+  /*color: white;*/
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -98,6 +103,11 @@ li.dropdown {
   display: block;
 }
 
+a.jump_to_shop{
+  color: pink !important;
+}
+
 .notnav {
   margin: 60px 0 0 20px;
 }
+

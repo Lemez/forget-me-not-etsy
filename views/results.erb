@@ -1,9 +1,11 @@
 
   <div class='results-wrapper'>
-
+      <% @lastshop='' %>
      <% @results.each do |item| %>
 
+
       <% if item['shop'] == 'Etsy' %>
+        <% @name = item['shop']%>
         <% @image = item['Images'].first['url_570xN']%>
         <% @link = item['link'] %>
         <% @price = item['price'] %>
@@ -11,9 +13,18 @@
          <% @image = item[:image] %>
          <% @link = item[:link] %>
          <% @price = item[:price] %>
+          <% @name = item[:shop]%>
       <% end %>
+
     <!-- image with link -->
-    <div class="list">
+    <% unless @lastshop==@name %>
+
+        <div class="list newlist" id="<%=@name%>">
+      <%else%>
+      <div class="list">
+    <% end %>
+    
+      <img class='results-icon' src="<%=BACKUP_PRODUCT_IMAGES[item[:shop]]%>" />
     <a class='results' href="<%=@link%>" target="_blank">
 
     
@@ -41,6 +52,7 @@
 
         </a>
     </div>
+    <% @lastshop = item['shop'] %>
     <% end %>
   </div>
 

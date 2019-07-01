@@ -32,9 +32,9 @@ class App < Sinatra::Base
     @current = params[:shop] 
     @total = @results.size
 
-    p @results.first if not @results.nil?
+    # p @results.first if not @results.nil?
 
-    @shops = params[:by_item] ? @results.map{|x|x[:shop]}.uniq : nil
+    @shops = params[:by_item] ? @results.map{|x|x[:shop]}.uniq : []
     @searchbar = params[:by_item] ? false : true
 
     erb :results, :locals => {:results => @results}

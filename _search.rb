@@ -5,7 +5,8 @@ def  search_by_item(opts)
   # 1. find all shops with that item as keyword
     shops = STORES.values.
     reject {|t| t[:keywords].nil?}.
-     select {|u|u[:keywords].include?(opts[:word])}. 
+    select {|t| t[:active]}.
+    select {|u|u[:keywords].include?(opts[:word])}. 
     select{ |s|s[:searchable] || s[:standalone]}
           
          

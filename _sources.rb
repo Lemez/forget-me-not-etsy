@@ -16,6 +16,7 @@ STORES = {
   "Novalia" =>       {:age=>13..99,
                     :provider=>'wordpress_woocommerce',
                     :name => "Novalia",
+                    :identifier => "Novalia",
                     :book => false,
                     :main_keyword => 'technology',
                     :base_url => "http://www.novalia.co.uk/contact-3-copy/",
@@ -28,30 +29,36 @@ STORES = {
                     :searchable => false,
                     :standalone => true,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
    
   },
     
-  "Pops & Ozzy"=>  {:age=>0..12,
+  "Pops And Ozzy"=>  {:age=>0..12,
                     :provider=>'shopify',
                     :book => false,
-                    :name => "Pops & Ozzy",
+                    :name => "Pops And Ozzy",
+                    :identifier => "Pops And Ozzy",
                     :main_keyword => 'kids',
                     :base_url => 'https://popsandozzy.com/',
                     :keywords => ['tattoo', 'shirt', 'clothes', 'kids', 'book', 'baby', 'toy'],
                     :searchable => true,
                     :search_string =>"search?q=",
                     :page_string =>"&page=",
-                    :standalone => true,
+                    :standalone => false,
                     :divider=>'+',
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
   },
 
       "Anorak"=>  {:age=>6..12,
                   :provider=>'bigcartel',
                   :book => false,
                   :name => "Anorak",
+                  :identifier => "Anorak",
                   :main_keyword => 'kids',
                   :domain => 'squarepegsstudiosocial',
                   :base_url => 'https://anorakmagazine.com/collections/all',
@@ -62,12 +69,15 @@ STORES = {
                   :standalone => true,
                   :divider=>nil,
                   :js=>false,
-                  :api=> true
+                  :active=>true,
+                  :api=> true,
+                :is_paginated=>true
   },
       "Tate Books" =>       {:age=>0..99,
                     :provider=>'salesforce',
                     :name => "Tate Books",
                     :book => true,
+                    :identifier => "Tate",
                     :main_keyword => 'book',
                     :base_url => "https://shop.tate.org.uk/books/view-all-books",
                     :link_base_url=> "https://shop.tate.org.uk",
@@ -83,13 +93,16 @@ STORES = {
                     :searchable => false,
                     :standalone => true,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
    
   },
       "Tate Gifts" =>       {:age=>0..99,
                     :provider=>'salesforce',
                     :book => false,
                     :main_keyword => 'gift',
+                    :identifier => "Tate",
                     :name => "Tate Gifts",
                     :base_url => "https://shop.tate.org.uk/gifts/view-all-gifts",
                     :link_base_url=> "https://shop.tate.org.uk",
@@ -105,12 +118,15 @@ STORES = {
                     :searchable => false,
                     :standalone => true,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
    
   },
       "Tate Homeware" =>       {:age=>0..99,
                     :provider=>'salesforce',
                     :book => false,
+                    :identifier => "Tate",
                     :name => "Tate Homeware",
                     :main_keyword => 'homeware',
                     :base_url => "https://shop.tate.org.uk/homeware/view-all-homeware",
@@ -127,13 +143,16 @@ STORES = {
                     :searchable => false,
                     :standalone => true,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
    
   },
   "Tate" =>       {:age=>0..99,
                     :provider=>'salesforce',
                     :book => false,
                     :name => "Tate",
+                    :identifier => "Tate",
                     :main_keyword => 'art',
                     :base_url => "https://shop.tate.org.uk/",
                     :link_base_url=> "https://shop.tate.org.uk",
@@ -149,7 +168,9 @@ STORES = {
                     :searchable => true,
                     :standalone => false,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
   },
 
 #magento also V+A https://www.vam.ac.uk/shop
@@ -158,6 +179,7 @@ STORES = {
                     :provider=>'magento',
                     :book => true,
                     :name => "Kew Books",
+                    :identifier => "Kew",
                     :main_keyword => 'nature books',
                     :base_url => "https://shop.kew.org",
                     :link_base_url=> "https://shop.kew.org",
@@ -174,7 +196,9 @@ STORES = {
                     :standalone => true,
                     :subcategories => true,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>false
   },
    "Kew Homeware" =>    {:age=>0..99,
                     :provider=>'magento',
@@ -197,7 +221,9 @@ STORES = {
                     :standalone => true, #used to see if it can be searched in a category without a keyword
                     :subcategories => true,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>false
   },
 
      "Kew Gifts" =>    {:age=>0..99,
@@ -220,7 +246,9 @@ STORES = {
                     :searchable => false,
                     :subcategories => false,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>false
   },
 
   
@@ -244,7 +272,9 @@ STORES = {
                     :standalone => true, #used to see if it can be searched in a category without a keyword
                     :subcategories => false,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>false
   },
  "Kew Gardens" =>    {:age=>0..99,
                     :provider=>'magento',
@@ -263,7 +293,9 @@ STORES = {
                     :searchable => true,
                     :standalone => false, #used to see if it can be searched in a category without a keyword
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>false
   },
 
   # https://www.vam.ac.uk/shop/home.html?p=2
@@ -287,7 +319,9 @@ STORES = {
                     :standalone => true, #used to see if it can be searched in a category without a keyword
                     :subcategories => false,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
   },
      "V and A Fashion" =>    {:age=>0..99,
                     :provider=>'magento',
@@ -309,7 +343,9 @@ STORES = {
                     :standalone => true, #used to see if it can be searched in a category without a keyword
                     :subcategories => false,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
   },
 
   "V and A Pooh" =>    {:age=>0..99,
@@ -332,7 +368,9 @@ STORES = {
                     :standalone => true,
                     :subcategories => false,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                     :is_paginated=>false
   },
    "V and A" =>    {:age=>0..99,
                     :provider=>'magento',
@@ -354,7 +392,10 @@ STORES = {
                     :standalone => false,
                     :subcategories => false,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>true
+
   },
 
   # https://shop.zsl.org/product-search?title=mug
@@ -365,6 +406,7 @@ STORES = {
                     :provider=>'amazon',
                     :book => false,
                     :name => "London Zoo",
+                    :identifier => "London Zoo",
                     :main_keyword => 'wildlife',
                     :base_url => "https://shop.zsl.org",
                     :link_base_url=> "https://shop.zsl.org",
@@ -372,11 +414,14 @@ STORES = {
                     :search_string =>"/product-search?title=",
                     :search_base_url=> "https://shop.zsl.org/product-search?title=",
                     :page_string =>"&page=", #any multiple of 100
-                    :max_tries => 5,
+                    :max_tries => 100,
                     :searchable => true,
                     :standalone => false,
+                    :subcategories => false,
                     :js=>false,
-                    :api=> false
+                    :active=>true,
+                    :api=> false,
+                     :is_paginated=>true
   },
 
   "Second Run"=>  {:age=>16..99,
@@ -393,9 +438,38 @@ STORES = {
                   :page_string =>"&offset=", #multiple of 10
                   :divider=>nil,
                   :js=>true,
+                  :active=>false,
                   :api=> false
+  },
+  "Ethical Kidz" =>    {:age=>0..99,
+                    :provider=>'custom',
+                    :book => false,
+                    :name => "Ethical Kidz",
+                    :identifier => "Ethical Kidz",
+                    :main_keyword => 'craft',
+                    :base_url => "https://www.ethicalkidz.co.uk",
+                    :initial_url=> "https://www.ethicalkidz.co.uk/shop/",
+                    :keywords => %w(animal kids toy craft),
+                    :search_string =>"/?q=",
+                    :search_base_url=> "https://www.ethicalkidz.co.uk/search/?q=",
+                    :page_string =>"?pp=all-1", 
+                    :max_tries => 5,
+                    :slugs => %w(creative/colouring creative/crafts creative/baking creative/kits creative/knitting creative/sewing creative/stamps-ink gifts-less-than-10),
+                    :searchable => false,
+                    :standalone => true,
+                    :subcategories => true,
+                    :js=>false,
+                    :active=>true,
+                    :api=> false,
+                     :is_paginated=>true
   }
+
+
+  
 }
+# William Morris gallery
+# Design Museum
+
 
 BACKUP_PRODUCT_IMAGES = {
   'Kew Gardens'=> "https://i2.wp.com/mygorgeousboys.com/wp-content/uploads/2014/04/Royal-Botanic-Gardens-Kew-logo.jpg",
@@ -406,9 +480,10 @@ BACKUP_PRODUCT_IMAGES = {
   'V and A'=> "https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fovertures.org.uk%2Fwp-content%2Fuploads%2F2017%2F05%2FVA-glasto3.jpg",
     'V and A Pooh'=> "https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fovertures.org.uk%2Fwp-content%2Fuploads%2F2017%2F05%2FVA-glasto3.jpg",
 'Anorak'=>"https://cdn.shopify.com/s/files/1/1862/6717/files/Anorak_New_-_Turquoise-01_large.png",
-  'Pops & Ozzy'=> "https://cdn.shopify.com/s/files/1/1810/5127/files/NEW_LOGO_800x.png",
+  'Pops And Ozzy'=> "https://cdn.shopify.com/s/files/1/1810/5127/files/NEW_LOGO_800x.png",
 'London Zoo'=>'https://tickets.picniq.co.uk/zsl-london-zoo/images/logo-zsllondonzoo.png',
 'Novalia'=> "http://www.novalia.co.uk/wp-content/uploads/2014/09/logo-dark1.png",
-'Tate'=>'https://www.romney-society.org.uk/uploads/8/0/9/1/80919364/tate-logo_orig.jpg'
+'Tate'=>'https://www.romney-society.org.uk/uploads/8/0/9/1/80919364/tate-logo_orig.jpg',
+"Ethical Kidz" => "https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-1/c31.31.388.388a/972205_224877514328203_250162744_n.png?_nc_cat=110&_nc_ht=scontent-frx5-1.xx&oh=628c63bd2a65c043538921fb2021c727&oe=5D80DA76"
 
 }

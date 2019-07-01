@@ -1,3 +1,21 @@
+not working: 
+404
+
+Kew Books https://shop.kew.org/kewbooksonline/new-books? nothing returned
+
+Pagination
+Kew Gifts only first 123 items
+
+<!-- Tate Gifts https://shop.tate.org.uk/gifts/view-all-gifts?/sz=100&start=0 (only 100) #no pagination detected
+Tate Home https://shop.tate.org.uk/homeware/view-all-homeware?/sz=100&start=0 (only 100) #no pagination detected -->
+
+Shirt: working
+Kids: working
+Toys: not working, fails on 
+"Trying https://shop.kew.org/catalogsearch/result/index/?limit=all&q=toy&"
+
+
+
 tux
 to access db
 

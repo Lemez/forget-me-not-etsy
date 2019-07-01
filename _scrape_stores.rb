@@ -8,17 +8,70 @@
 
 # end
 
+def scrape_custom(shop)
+  p "custom"
+  case shop[:name]
+  when "Ethical Kidz"
+    @string =   shop[:page_string]
+  end
+
+  while shop[:incomplete]
+
+    @category = shop[:opts][:search] ? shop[:opts][:word] : shop[:main_keyword]
+
+    fields = shop[:subcategories] ? shop[:slugs] : [""]
+      
+    fields.each do |slug|
+
+        shop[:url] =  "#{shop[:initial_url]}#{slug}/#{@string}" 
+      
+        p "Trying #{shop[:url]}"
+        # p shop[:initial_url]
+        # p slug
+        # p @string
+
+        $html = Nokogiri::HTML(open(shop[:url]))
+       
+
+        @data={}
+        $html.css($shop_css[:product_css]).each do |product|
+            begin
+                @data = get_data_from_product(shop,product)
+                @data = add_categories_to(shop,@data)
+                shop[:results][:data] << @data
+                p @data
+                 
+            rescue  StandardError => e
+                  # p "Problem = #{@problem}" unless @problem.empty?
+                  p @data
+                  raise e
+ 
+            end
+         
+        end
+      end
+    shop[:incomplete] = false
+  end
+  
+  shop[:results][:data].flatten.uniq
+end
+
 def scrape_magento(shop)
-  # KEW uses limit=all
+  # KEW uses limit=all? { |e|  }
+  # SLUG: https://shop.kew.org/kewbooksonline/gift-books?limit=all 
+  # SEARCH: https://shop.kew.org/catalogsearch/result/?q=frog
+
   # V+A uses pagination p=1
    
   while shop[:incomplete]
 
 
-    if not shop[:opts][:search] #if not passing a search string from searchbar
-      fields = shop[:subcategories] ? shop[:slugs] : [""]
+    if  !shop[:opts][:search] && shop[:subcategories] #if not passing a search string from searchbar
+      fields =  shop[:slugs]
+      @slugging = true
     else # but if yes...
       fields = [""] #ignore slug-based iterative search
+      @slugging = false
     end
 
      fields.each do |slug|
@@ -27,71 +80,46 @@ def scrape_magento(shop)
         when "Kew"
           @string = shop[:results_size_string]
           @size = shop[:results_size]
-          $is_paginated = false
-          @product_css = 'div.relative-holder'
-          @price_css = 'span.price'
-          @img_css = 'img'
-          @link_css = 'a'
-          @title_css = 'h2.product-name a'
-          @img_source = 'src'
         when "V and A"
           @string = shop[:page_string]
-          @size = shop[:results][:page]
-          $is_paginated = true
-          @product_css = "article.product-thumb"
-          @price_css = "div.product-thumb__price"
-          @img_css = 'img'
-          @link_css ='a'
-          @title_css = 'div.product-thumb__title'
-          @img_source = 'data-src'
+          @size = shop[:results][:page]  
         end
 
-        if slug == ""
-          shop[:url] = shop[:opts][:word].empty? ? "#{shop[:initial_url]}#{slug}&#{@string}#{@size}" : "#{shop[:search_base_url]}#{shop[:opts][:word]}&#{@string}#{@size}"
-        else 
-          shop[:url] = "#{shop[:initial_url]}#{slug}?#{@string}#{@size}"
+        @pagination_string = shop[:is_paginated]||shop[:identifier]=='Kew' ? "?#{@string}#{@size}" : ""
+        shop[:url] = "#{shop[:initial_url]}#{slug}#{@pagination_string}"
+         
+        if !@slugging && !shop[:opts][:word].empty?
+          shop[:url] =   "#{shop[:search_base_url]}#{shop[:opts][:word]}&#{@string}#{@size}"
         end
           
-        p "Trying #{shop[:url]}"
+        p "Trying #{shop[:url]}: Slugs=#{@slugging}"
 
         $html = Nokogiri::HTML(open(shop[:url]))
-        $pagination = $html.css('a.pagination__next')
-
-        $html.css(@product_css).each_with_index do |product, index|
+        $pagination = $html.css($shop_css[:pagination_css])
+        
+        $html.css($shop_css[:product_css]).each_with_index do |product, index|
      
             begin
-                      link= product.css(@link_css)[-1]
-                      imgdiv = product.at(@img_css)
-                      price = product.at(@price_css)
-                      title = product.at(@title_css).text.strip
-                   
-                      data = {:title => title,
-                      :price => price.text.strip,
-                      :link =>  link.attributes['href'].value,
-                      :image => imgdiv.attributes[@img_source].value ,
-                      :description => '',
-                      :has_description => false,
-                      :categories => ([shop[:main_keyword]] << title.split(" ")).flatten,
-                      :soldout => false,
-                      :shop => shop[:name]
-                    }
+                @data = get_data_from_product(shop,product)
+                @data = add_categories_to(shop,@data)
+                shop[:results][:data] << @data
+                p @data
                  
-                 shop[:results][:data] << data
-                  print "."
-            rescue => e
-              puts e
-              # raise e
-              next
+            rescue  StandardError => e
+                  # p "Problem = #{@problem}" unless @problem.empty?
+                  p @data
+                  raise e
+ 
             end
           end
 
-          shop[:results][:data].each{|x| ap x} #unless shop[:opts][:web]
+          # shop[:results][:data].each{|x| ap x} #unless shop[:opts][:web]
 
           p "Done #{shop[:url]}"
         end
 
-        if $is_paginated
-          last_page = $html.css('div.pagination__pages a').empty? ? true : $html.css('div.pagination__pages a').last.classes.include?('is-current')
+        if shop[:is_paginated]
+          last_page = $html.css($shop_css[:last_page_css]).empty? ? true : $html.css($shop_css[:last_page_css]).last.classes.include?('is-current')
           p "Last page: #{last_page}"
            if $pagination.text.strip=="Next"
               if shop[:results][:page] < shop[:max_tries] && !last_page
@@ -125,35 +153,22 @@ def scrape_amazon(shop)
 
     html = Nokogiri::HTML(open(shop[:url]))
     # p html
-    pagination = html.css('li.pager-next')
+    pagination = html.css($shop_css[:pagination_css])
 
-    html.css('div.card-grid__item div.card').each_with_index do |product, index|
-        # p product
-        begin
-                  link= product.at('div.card__media a')
-                  img = product.at('img')
-                  price = product.at('div.field-commerce-price')
-                  # p link
-                  # p img
-                  # p price
-               
-                  data = {:title => img.attributes['title'].value,
-                  :price => price.text.strip,
-                  :link =>  shop[:link_base_url] + link.attributes['href'].value,
-                  :image => img.attributes['src'].value,
-                  :description => '',
-                  :has_description => false,
-                  :categories => '',
-                  :soldout => false,
-                  :shop => shop[:name]
-                }
-             
-             shop[:results][:data] << data
-              print "."
-        rescue => e
-          puts e
-          next
-        end
+    html.css($shop_css[:product_css]).each_with_index do |product, index|
+         begin
+                @data = get_data_from_product(shop,product)
+                @data = add_categories_to(shop,@data)
+                shop[:results][:data] << @data
+                p @data
+                 
+            rescue  StandardError => e
+                  # p "Problem = #{@problem}" unless @problem.empty?
+                  p @data
+                  next
+ 
+            end
+     
       end
 
       # shop[:results][:data].each{|x| ap x} unless shop[:opts][:web]
@@ -184,14 +199,14 @@ def scrape_amazon(shop)
 
 end
 
-def scrape_salesforce(shop)
+def scrape_salesforce(shop) #Tate
   p shop
     @web = shop[:opts][:web]
 
     if shop[:opts][:word].to_s.empty?
       shop[:base_url] += "?"
       shop[:search_string] = ''
-      shop[:url] = "#{shop[:base_url]}/#{shop[:results_size_string]}#{shop[:results_size]}#{shop[:page_string]}0"
+      shop[:url] = "#{shop[:base_url]}#{shop[:results_size_string]}#{shop[:results_size]}#{shop[:page_string]}0"
 
     else
       shop[:url] = "#{shop[:search_base_url]}#{shop[:opts][:word]}#{shop[:results_size_string]}#{shop[:results_size]}#{shop[:page_string]}0"
@@ -205,22 +220,22 @@ def scrape_salesforce(shop)
    while shop[:incomplete]
 
       html = Nokogiri::HTML(open(shop[:url]))
-      pagination = html.css('ul.pagination-wrapper li.single-page')
+      pagination = html.css($shop_css[:pagination_css])
       
-      html.css('div.product-tile').each_with_index do |product, index|
+      html.css($shop_css[:product_css]).each_with_index do |product, index|
         begin
                
                   id = product.attributes['data-itemid'].value
-                  prices = product.css('div.product-pricing span')
+                  prices = product.css($shop_css[:price_css])
                   price_span = prices.size==1 ? prices : prices[0]
                   # product.at('span.product-sales-price')
-                  href = product.at('div.product-name a.name-link').attributes['href'].value
+                  href = product.at($shop_css[:link_css]).attributes['href'].value
                   link = href.include?('https:') ? href : shop[:link_base_url] + href
 
-                  data = {:title => product.at('div.product-name a.name-link span').text,
+                  data = {:title => product.at($shop_css[:title_css]).text,
                   :price => price_span.text.strip,
                   :link =>  link,
-                  :image => product.at('div.product-image a.thumb-link img').attributes['src'].value,
+                  :image => product.at($shop_css[:img_css]).attributes[$shop_css[:img_source]].value,
                   :description => '',
                   :has_description => false,
                   :categories => '',
@@ -260,7 +275,7 @@ def scrape_salesforce(shop)
 
       p "Done #{shop[:url]}"
       
-      if pagination.any? && !shop[:opts][:web]
+      if pagination.any? #&& !shop[:opts][:web]
         the_page = pagination[-1].attributes.values.first.value
   
         is_last_page = the_page.split(" ").include?('current-page')
@@ -287,30 +302,23 @@ def scrape_wordpress_woocommerce(shop) #working for Novalia
   p shop[:url]
    while shop[:incomplete]
       html = Nokogiri::HTML(open(shop[:url]))
-      counter = html.css('div.mk-woocommerce-result-count').text.split(" ")
+      counter = html.css($shop_css[:pagination_css]).text.split(" ")
       total = counter[-2].to_i
       current = counter[1].split("–").last.to_i
 
-       html.css('div.mk-product-holder').each do |product|
-        begin
-
-          desc = product.at('a img').attributes['alt'].value
-
-          data = {:title => desc,
-                  :price => product.at('span.woocommerce-Price-amount').text,
-                  :link =>  product.at('a.woocommerce-LoopProduct-link').attributes['href'].value,
-                  :image => JSON.parse(product.at('a img').attributes['data-mk-image-src-set'])['mobile'],
-                  :description => '',
-                  :has_description => false,
-                  :categories => desc.split(" ").uniq,
-                  :soldout => false,
-                  :shop => shop[:name]
-                }
-          shop[:results][:data] << data
-
-        rescue
-          next 
-        end
+       html.css($shop_css[:product_css]).each do |product|
+          begin
+                @data = get_data_from_product(shop,product)
+                @data = add_categories_to(shop,@data)
+                shop[:results][:data] << @data
+                p @data
+                 
+          rescue  StandardError => e
+                # p "Problem = #{@problem}" unless @problem.empty?
+                p @data
+                next
+ 
+          end
       end
 
     p "Done #{shop[:url]}"
@@ -333,48 +341,43 @@ end
 
 def scrape_shopify(shop)
   #works for https://popsandozzy.com/search?q=kids
-  
+  p "shopify"
+  $empties = 0
   while shop[:incomplete]
     p shop[:url]
     html = Nokogiri::HTML(open(shop[:url]))
-    if html.css('div#pagination a').empty? || html.css('div#pagination a').nil?
+    pag = $shop_css[:pagination_css]
+    if html.css(pag).nil? || html.css(pag).empty? 
       @last_page = true
     else
-      counter = html.css('div#pagination a').last.text
+      counter = html.css(pag).last.text
       @last_page = counter.to_i == shop[:results][:page] ? true : false
     end
     
+    @data={}
+    stuff =  html.css($shop_css[:product_css])
 
-    html.css('div.product-index').each do |product|
+   stuff.each do |product|
+
       begin
 
-        categories =  [shop[:opts][:word]] + product.at('a img').attributes['alt'].value.downcase.split(" ")
-        categories += product.attributes['data-alpha'].value.downcase.split(" ")
-        price = product.attributes['data-price'].value.to_s
-
-        data = {:title => product.attributes['data-alpha'].value,
-                  :price => "£" + price.slice(0..price.length-3) + "." + price.slice(-2..-1),
-                  :link =>  shop[:base_url] + product.at('a').attributes['href'].value[1..-1], #remove first '/'
-                  :image => 'https://' + product.at('a img').attributes['src'].value.split("?")[0].gsub!("//",""),
-                  :description => product.at('a img').attributes['alt'].value,
-                  :has_description => true,
-                  :categories => categories.uniq,
-                  :shop => shop[:name],
-                  :soldout => product.css('div.so').any?
-                }
-        shop[:results][:data] << data
+        @data = get_data_from_product(shop,product)
+        @data = add_categories_to(shop,@data)
+        shop[:results][:data] << @data
+        p @data
 
       rescue
+        $empties +=1
         next
       end
     end
 
 
-    p shop[:url]
+    $empties +=1 if @data.keys.empty? || @data.keys.nil?
     shop[:results][:page] +=1
 
     shop[:url] = "#{shop[:base_url]}#{shop[:search_string]}#{shop[:opts][:word]}#{shop[:page_string]}#{shop[:results][:page]}"
-    redo unless @last_page
+    redo unless @last_page || $empties >=3
     # redo if current != total
 
     shop[:incomplete] = false

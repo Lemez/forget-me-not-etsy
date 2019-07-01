@@ -18,26 +18,17 @@ def big_cartel_q(shop)
   response = HTTParty.get(uri)
   info = JSON.parse(response.body)
 
-  results = []
-  info.each do |item|
-
-   price = "£" + sprintf('%.2f',item['price']).to_s
-
-
-      results << {:title => item['name'],
-                  :price => price,
-                  :link =>  shop[:link_base_url] + item['url'],
-                  :image => item['images'].first['url'],
-                  :soldout => item['options'].first['sold_out'],
-                  :description => item['description'],
-                  :has_description => true,
-                  :categories => item['categories'].map{|x|x['name']},
-                  :shop=>shop[:name]
-                }
-
+  info.each do |product|
+  
+      @data = get_data_from_product(shop,product)
+      @data = add_categories_to(shop,@data)
+      shop[:results][:data] << @data
+      p @data
+         
+  
   end
 
-  results
+  shop[:results][:data].flatten.uniq
   
 end
 

@@ -4,6 +4,7 @@ require_relative './_file'
 require_relative './_scrape'
 require_relative './_search'
 require_relative './_sources'
+require_relative './_sources_css'
 require 'httparty'
 require 'excon'
 require 'open-uri'
@@ -30,6 +31,7 @@ Capybara.register_driver :poltergeist do |app|
 end
 
 Capybara.ignore_hidden_elements = true
+Capybara.run_server = false
 
 def main
   # site_scrape({:dom=>'https://secondrundvd.ecwid.com/#!/c/0/'})
@@ -66,7 +68,7 @@ def query(opts={:shop=>nil, :tags=>nil, :web=>true, :search=>false,:by_item=>fal
   case searchtype
   when 'shop'
     
-    if name=='Etsy'
+    if @name=='Etsy'
       @data = init_etsy(opts) 
     else
       @data = search_scrape({:name=>@name,:word=>$word,:web=>opts[:web], :search=>opts[:search]})

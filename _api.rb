@@ -25,7 +25,6 @@ def big_cartel_q(shop)
       shop[:results][:data] << @data
       p @data
          
-  
   end
 
   shop[:results][:data].flatten.uniq

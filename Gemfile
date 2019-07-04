@@ -1,5 +1,5 @@
 source 'https://rubygems.org' 
-ruby "2.3.3"
+# ruby "2.3.3"
 gem 'etsy'
 gem 'rerun'
 gem 'sinatra'
@@ -17,6 +17,7 @@ gem 'oauth2'
 gem 'spidr' #crawling
 gem 'upton' #scraping
 gem 'diviner', '~> 0.2.1' #product categorising
+gem "typhoeus"
 
 group :development do
   gem "tux"

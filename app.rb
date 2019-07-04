@@ -3,13 +3,15 @@ require 'sinatra'
 require 'sinatra/activerecord'
 
   set :database_file, "config/database.yml"
-  set :server, "thin"
+  set :server, "puma"
   set :logging, true
   
 class App < Sinatra::Base
+  $searchbar = false
 
   get '/' do
     @friends = Friend.order('lastname, firstname')
+
      erb :friends, :locals => {:friends => @friends}
   end
 
@@ -35,13 +37,14 @@ class App < Sinatra::Base
     # p @results.first if not @results.nil?
 
     @shops = params[:by_item] ? @results.map{|x|x[:shop]}.uniq : []
-    @searchbar = params[:by_item] ? false : true
+    $searchbar = true unless params[:by_item].nil?
+
 
     erb :results, :locals => {:results => @results}
   end
 
   get '/recommendations/:id/:word' do
-    @searchbar = true 
+    $searchbar = true 
     keyword = params[:word]
     # if Friend.find_by(id:params[:id]).age <= 18
     #   keyword= params[:word] + ' funny'
@@ -57,7 +60,7 @@ class App < Sinatra::Base
 
   post '/results' do
     p params
-    @searchbar = true 
+    $searchbar = true 
     @results = query(opts={:tags=>params[:search], :shop=>params[:shop], :web=>true, :search=>true})
     @current = params[:shop] 
     @total = @results.size

@@ -4,8 +4,11 @@ html *
 {
    /*font-size: 1em !important;*/
    /*color: #000 !important;*/
-   font-family: Georgia !important;
+   /*font-family: Georgia !important;*/
    scroll-behavior: smooth  !important;
+    background-color: #f1f1f1;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Lato", sans-serif !important;
 }
 
 h2 {
@@ -177,6 +180,17 @@ img.results-icon {
   width: 50px;
   border-radius: 50%;
 }
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+/*.grid_bottom{
+  flex-shrink: 0;
+}*/
 
 
 

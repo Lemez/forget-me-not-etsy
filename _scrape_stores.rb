@@ -12,30 +12,25 @@ def scrape_custom(shop)
   p "custom"
   case shop[:name]
   when "Ethical Kidz"
-    @string =   shop[:page_string]
+    @string =   "/#{shop[:page_string]}"
   end
 
   while shop[:incomplete]
-
-    @category = shop[:opts][:search] ? shop[:opts][:word] : shop[:main_keyword]
 
     fields = shop[:subcategories] ? shop[:slugs] : [""]
       
     fields.each do |slug|
 
-        shop[:url] =  "#{shop[:initial_url]}#{slug}/#{@string}" 
+        shop[:url] =  "#{shop[:initial_url]}#{slug}#{@string}" 
       
         p "Trying #{shop[:url]}"
-        # p shop[:initial_url]
-        # p slug
-        # p @string
 
         $html = Nokogiri::HTML(open(shop[:url]))
-       
-
+      
         @data={}
-        $html.css($shop_css[:product_css]).each do |product|
+        $html.css($shop_css[:product_css]).each_with_index do |product,index|
             begin
+                puts index
                 @data = get_data_from_product(shop,product)
                 @data = add_categories_to(shop,@data)
                 shop[:results][:data] << @data
@@ -101,7 +96,7 @@ def scrape_magento(shop)
      
             begin
                 @data = get_data_from_product(shop,product)
-                @data = add_categories_to(shop,@data)
+                @data = add_categories_to(shop,@data,slug)
                 shop[:results][:data] << @data
                 p @data
                  
@@ -117,6 +112,7 @@ def scrape_magento(shop)
 
           p "Done #{shop[:url]}"
         end
+
 
         if shop[:is_paginated]
           last_page = $html.css($shop_css[:last_page_css]).empty? ? true : $html.css($shop_css[:last_page_css]).last.classes.include?('is-current')
@@ -223,69 +219,38 @@ def scrape_salesforce(shop) #Tate
       pagination = html.css($shop_css[:pagination_css])
       
       html.css($shop_css[:product_css]).each_with_index do |product, index|
-        begin
-               
-                  id = product.attributes['data-itemid'].value
-                  prices = product.css($shop_css[:price_css])
-                  price_span = prices.size==1 ? prices : prices[0]
-                  # product.at('span.product-sales-price')
-                  href = product.at($shop_css[:link_css]).attributes['href'].value
-                  link = href.include?('https:') ? href : shop[:link_base_url] + href
+         begin
+                @data = get_data_from_product(shop,product)
+                @data = add_categories_to(shop,@data)
+                shop[:results][:data] << @data
+                p @data
+                 
+        rescue  StandardError => e
+          p "Rescue me!"
+                # p "Problem = #{@problem}" unless @problem.empty?
+                p @data
+                next
 
-                  data = {:title => product.at($shop_css[:title_css]).text,
-                  :price => price_span.text.strip,
-                  :link =>  link,
-                  :image => product.at($shop_css[:img_css]).attributes[$shop_css[:img_source]].value,
-                  :description => '',
-                  :has_description => false,
-                  :categories => '',
-                  :soldout => false,
-                  :shop => shop[:name]
-                }
-
-
-            if shop[:book] && !shop[:opts][:web]
-              data[:categories] = ['book']
-              data[:book] = true
-              product_page = Nokogiri::HTML(open(data[:link]))  
-              data[:author] = product_page.at('div.by-brand-wrapper span.brand-name').text.split("By").last.strip
-            else
-              data[:book] = false
-              words = data[:title].split(" ")
-              arr = Array.new words.flatten 
-              data[:categories] = ([shop[:main_keyword],shop[:opts][:word]] << arr).flatten.uniq
-              data[:main_category] =  data[:categories].last
-              $all_categories << words
-
-            end
-
-          # data = data.to_json if @web
-          shop[:results][:data] << data
-          print "."
-
-        rescue
-          next 
         end
+       
       end
-
-      shop[:results][:data].each{|x| ap x} unless shop[:opts][:web]
-      
-      # $all_categories.flatten!
-      # cats = $all_categories.map(&:downcase).join(" ")
 
       p "Done #{shop[:url]}"
       
       if pagination.any? #&& !shop[:opts][:web]
         the_page = pagination[-1].attributes.values.first.value
-  
         is_last_page = the_page.split(" ").include?('current-page')
-        offset = shop[:results_size].to_i * shop[:results][:page]
-
-        shop[:url] = "#{shop[:base_url]}#{shop[:search_string]}#{shop[:opts][:word]}#{shop[:results_size_string]}#{shop[:results_size]}#{shop[:page_string]}#{offset}"
-        p "Trying #{shop[:url]}"
-      
-        shop[:results][:page] +=1
-        redo if not is_last_page
+        p is_last_page
+        
+        if not is_last_page
+          offset = shop[:results_size].to_i * shop[:results][:page]
+          shop[:url] = "#{shop[:base_url]}#{shop[:search_string]}#{shop[:opts][:word]}#{shop[:results_size_string]}#{shop[:results_size]}#{shop[:page_string]}#{offset}"
+          shop[:results][:page] +=1
+          p "Trying #{shop[:url]}"
+          redo
+        else
+          p "Last page"
+        end
 
       else
         p "no pagination detected"
@@ -298,16 +263,20 @@ def scrape_salesforce(shop) #Tate
     shop[:results][:data]
 end
 
-def scrape_wordpress_woocommerce(shop) #working for Novalia
+def scrape_wordpress_woocommerce(shop) #working for Novalia, not yet for Pushkin Press
   p shop[:url]
    while shop[:incomplete]
       html = Nokogiri::HTML(open(shop[:url]))
-      counter = html.css($shop_css[:pagination_css]).text.split(" ")
-      total = counter[-2].to_i
-      current = counter[1].split("–").last.to_i
 
-       html.css($shop_css[:product_css]).each do |product|
+      if shop[:is_paginated]
+        counter = html.css($shop_css[:pagination_css]).text.split(" ")
+        total = counter[-2].to_i
+        current = counter[1].split("–").last.to_i
+      end
+
+       html.css($shop_css[:product_css]).each_with_index do |product,index|
           begin
+                puts index
                 @data = get_data_from_product(shop,product)
                 @data = add_categories_to(shop,@data)
                 shop[:results][:data] << @data
@@ -322,17 +291,18 @@ def scrape_wordpress_woocommerce(shop) #working for Novalia
       end
 
     p "Done #{shop[:url]}"
-    shop[:results][:page] +=1
-
-    shop[:url] = "#{shop[:base_url]}#{shop[:search_string]}#{shop[:opts][:word]}#{shop[:page_string]}#{shop[:results][:page]}/"
-    p "Trying #{shop[:url]}"
     
-    redo if current != total
+    if shop[:is_paginated]
+      shop[:results][:page] +=1
+      shop[:url] = "#{shop[:base_url]}#{shop[:search_string]}#{shop[:opts][:word]}#{shop[:page_string]}#{shop[:results][:page]}/"
+      p "Trying #{shop[:url]}"
+      redo if current != total
+    end
 
     shop[:incomplete] = false
   end
 
-  p shop[:results][:data]
+  # p shop[:results][:data]
   shop[:results][:data]
 
     

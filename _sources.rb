@@ -5,6 +5,9 @@ CRAFT = {:api=>false, :saved=>false,:name => "Folksy"}
 POSTERS = {:api=>false, :saved=>false,:name => "Tate"}
 ELECTRONIC = {:api=>false, :provider=> 'wordpress_woocommerce',:saved=>false,:name=>"Novalia",:url=>"http://www.novalia.co.uk/contact-3-copy/?orderby=date"}
 
+# https://www.dukeofuke.co.uk
+# https://www.birdkids.co.uk/
+
 # Big Cartel has an api
 KIDS = [
   # {:name => "Kawaii Doodles Club", :url => 'http://kawaiidoodles.club/', :keywords => ['badge', 't-shirt', 'kids']},
@@ -12,7 +15,29 @@ KIDS = [
 
 SHOP_PROVIDERS=%w(wordpress_woocommerce wordpress_ecwid shopify bigcartel salesforce)
 
-STORES = {
+STORES = {"Pushkin Press"=>{:age=>5..16,
+                    :provider=>'wordpress_woocommerce',
+                    :name => "Pushkin Press",
+                    :identifier => "Pushkin Press",
+                    :book => true,
+                    :main_keyword => 'literature',
+                    :initial_url => "https://www.pushkinpress.com/pushkin-childrens/",
+                    :base_url => "https://www.pushkinpress.com/pushkin-childrens/",
+                    :link_base_url=> "",
+                    :keywords => %w(book Europe kids),
+                    :search_string =>"",
+                    :results_size_string => nil,
+                    :results_size=> 0,
+                    :page_string =>nil, #only 2
+                    :searchable => false,
+                    :standalone => true,
+                    :subcategories => false,
+                    :js=>false,
+                    :active=>true,
+                    :api=> false,
+                    :is_paginated=>false
+
+    },
   "Novalia" =>       {:age=>13..99,
                     :provider=>'wordpress_woocommerce',
                     :name => "Novalia",

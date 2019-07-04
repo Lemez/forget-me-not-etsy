@@ -36,7 +36,8 @@ def search_scrape(opts={:name=>nil, :word=>nil, :search=>false})
     
   # write_to(results, {:format=>'json'}) # or 'csv' or 'print'
   # results = opts[:options][:web] ? results : results.to_json
-  results.uniq
+  p "#{shop[:results][:data].size} results found for #{shop[:name]}"
+  clean_up_results(shop).uniq
 end
 
 def get_data_from_product(shop,product)
@@ -44,7 +45,8 @@ def get_data_from_product(shop,product)
     :has_description => false,
     :description => '',
     :shop => shop[:name],
-    :soldout => false
+    :soldout => false,
+    :price => nil
   }
 
   case shop[:identifier]
@@ -60,7 +62,7 @@ def get_data_from_product(shop,product)
     data[:soldout] = product.css('div.so').any?
 
   when "V and A", "Kew"
-    link= product.css($shop_css[:link_css])[-1]
+    link= product.at($shop_css[:link_css])#[-1]
     linkalt= product.css($shop_css[:link_css])[0]
     pricediv = product.at($shop_css[:price_css])
     titlediv = product.at($shop_css[:title_css])
@@ -114,16 +116,91 @@ def get_data_from_product(shop,product)
     data[:description] = product['description']
     data[:has_description] = true
     data[:categories] = product['categories'].map{|x|x['name']}
+  when "Tate"
+         
+    prices = product.css($shop_css[:price_css])
+    price_span = prices.size==1 ? prices : prices[0]
+    href = product.at($shop_css[:link_css]).attributes['href'].value
 
+    data[:title]= product.at($shop_css[:title_css]).text
+    data[:price]= price_span.text.strip
+    data[:link] = href.include?('https:') ? href : shop[:link_base_url] + href
+    data[:image]= product.at($shop_css[:img_css]).attributes[$shop_css[:img_source]].value
+
+  when "Pushkin Press"
+
+    data[:link] = product.attributes['href'].value
+    data[:image] = product.at($shop_css[:img_css]).attributes[$shop_css[:img_source]]
+    data[:title], data[:author] = product.at($shop_css[:img_css]).attributes['alt'].value.split(" by ")
+  
   end
+
 
   data
 end
 
-def add_categories_to(shop,d)
-  d[:categories] =  [shop[:opts][:word], shop[:main_keyword]] << d[:title].downcase.split(" ")
+def add_categories_to(shop,d,slug)
+  d[:categories] =  [shop[:opts][:word], slug, shop[:main_keyword]] << d[:title].downcase.split(" ")
   d[:categories] = d[:categories].flatten.uniq.reject! { |s| s&.strip&.empty? }
   d
+end
+
+def clean_up_results(shop)
+    results = []
+    arr = []
+    if shop[:book] && shop[:identifier]!="Kew" #&& !shop[:opts][:web]
+        
+        shop[:results][:data].each_with_index do |book,i|
+          unless book[:link].include?('@')
+              arr[i]=Thread.new { 
+                page = Nokogiri::HTML(HTTParty.get(book[:link])) 
+                case shop[:identifier] 
+                when "Kew"
+                  book = retrieve(book,page,[:description])
+                when "Tate"
+                  book = retrieve(book,page,[:author])
+                when "Pushkin Press"
+                  book = retrieve(book,page,[:price,:description,:release_date])
+                end
+                results << book
+                # p book
+              }
+          end
+        end
+        shop[:results][:data] = results
+        arr.each{|t|t.join}
+      end
+
+      
+
+      # shop[:results][:data].each{|x| ap x} unless shop[:opts][:web]
+      shop[:results][:data]
+end
+
+def retrieve(book,page,keys=[])
+  keys.each do |key|
+
+    case key
+    when :author
+      p page.at($shop_css[:author_css])
+      book[:author] = page.at($shop_css[:author_css]).text.split("By").last.strip
+    when :price
+      book[:price] = page.at($shop_css[:price_css]).text.strip
+    when :description
+      book[:description]=page.css($shop_css[:desc_css]).map(&:text).join(' ').strip
+      book[:has_description] = !book[:description].empty?
+    when :release_date
+      if page.at('p.releasedate').nil?
+        book[:available_now] = true
+      else
+        date = page.at('p.releasedate').text.downcase.gsub('released','').strip
+        book[:release_date] = Date.parse(date)
+        book[:available_now] = false
+      end
+    end
+  end
+   
+  book  
 end
 
 

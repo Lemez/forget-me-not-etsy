@@ -18,6 +18,7 @@ require 'spidr'
 require 'upton'
 require "awesome_print"
 require 'csv'
+require "typhoeus"
 # require 'deviner'
 
 include Capybara::DSL

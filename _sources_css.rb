@@ -12,10 +12,10 @@ CSS = {
     "Kew"   =>   {:product_css=>'li.item',
                     :price_css => 'span.price',
                     :img_css => 'img',
-                    :link_css =>'a',
+                    :link_css =>'a.product-image',
                     :title_css => 'h2.product-name a',
                     :img_source => 'src',
-                    :desc_css=>nil,
+                    :desc_css=>'div.std',
                     :pagination_css=> 'a.pagination__next',
                     :last_page_css=>'div.pagination__pages a'
             },
@@ -36,7 +36,8 @@ CSS = {
                     :title_css => 'div.product-name a.name-link span',
                     :img_source => 'src',
                     :desc_css=>nil,
-                    :pagination_css=> 'ul.pagination-wrapper li.single-page'
+                    :pagination_css=> 'ul.pagination-wrapper li.single-page',
+                    :author_css=>'div.by-brand-wrapper span.brand-name'
             },      
     "Novalia"   =>   {:product_css=>'div.mk-product-holder',
                     :price_css => 'span.woocommerce-Price-amount',
@@ -64,6 +65,16 @@ CSS = {
                     :title_css => 'h3 a',
                     :img_source =>'src' ,
                     :pagination_css=> nil
+            },
+     "Pushkin Press" =>   {:product_css=>'a.taxpagebook',
+                    :price_css => 'span.woocommerce-Price-amount',
+                    :img_css => 'div.taxpage img',
+                    :link_css =>nil,
+                    :desc_css=>'div.woocommerce-product-details__short-description p',
+                    :title_css => 'div.taxpage img',
+                    :img_source =>'src' ,
+                    :pagination_css=> nil
             }
+
 
 }

@@ -17,42 +17,56 @@
       <% end %>
 
     <!-- image with link -->
-    <% unless @lastshop==@name %>
-
-        <div class="list newlist" id="<%=@name%>">
+    <% @class=item[:categories].join(" ") %>
+    <% if @lastshop!=@name %>
+        <div class="newlist list column <%=@class%>" id="<%=@name%>">
       <%else%>
-      <div class="list">
+      <div class="list column <%=@class%>">
     <% end %>
     
       <img class='results-icon' src="<%=BACKUP_PRODUCT_IMAGES[item[:shop]]%>" />
     <a class='results' href="<%=@link%>" target="_blank">
 
     
+      
+        
+          <img class='img_result' src="<%=@image%>" />      
+       
 
-      <img class='img_result' src="<%=@image%>" />
-     
-      <h2>
-         <span style='font-weight=700;'><%= @price %> </span>
-        <%= item['currency']%>
-      </h2>
-       <% if item['shop'] == 'Etsy' %>
-         <p>Delivered in 
-          <span style='font-weight=700;'><%=item['from']%></span> to
-          <span style='font-weight=700;'><%=item['to']%></span> days
-         </p>
-       <% end %>
+        
+          <h2>
+             <span style='font-weight=700;'><%= @price %> </span>
+            <%= item['currency']%>
+          </h2>
+        
+       
+          <% if item['shop'] == 'Etsy' %>
+           
+           <p>Delivered in 
+            <span style='font-weight=700;'><%=item['from']%></span> to
+            <span style='font-weight=700;'><%=item['to']%></span> days
+           </p>
+          
+         <% end %>
+       
 
-       <% if item['shop'] == 'Etsy' %>
-          <% item["data"].each_pair do |k,v| %>
-              <p><%=v%></p>
+         <% if item['shop'] == 'Etsy' %>
+         
+            <% item["data"].each_pair do |k,v| %>
+                <p><%=v%></p>
+            <% end %>
+         
+          <% else %>
+            <h4><%=item[:title]%></h4>  
+            <% if not item[:author].nil? %>
+            <p class='grid_bottom'><%=item[:author]%></p>  
+            <% end %>
           <% end %>
-        <% else %>
-          <p><%=item[:title]%></p>  
-        <% end %>
 
-        </a>
+          </a>
+        
     </div>
-    <% @lastshop = item['shop'] %>
+    <% @lastshop = @name %>
     <% end %>
   </div>
 

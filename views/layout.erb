@@ -30,6 +30,7 @@
     </li> -->
       <a href="javascript:void(0)" class="dropbtn">Shop</a>
       <div class="dropdown-content">
+        <a href="/results?shop=Pushkin Press">Pushkin Press</a>
         <a href="/results?shop=Novalia">Novalia</a>
         <a href="/results?shop=Anorak">Anorak</a>
         <a href="/results?shop=V and A Fashion">V+A Fashion</a>
@@ -80,6 +81,9 @@
         
       </div>
     </li>
+    <li>Filter: 
+      <div class='toggle' value='children'>kids</div>
+    </li>
 
      
      <% if defined? @shops %>
@@ -106,7 +110,7 @@
   <a href="/results">Find</a>
   -->
  
-  <% if defined? @searchbar %>
+  <% if $searchbar %>
 
     <form class='search' method="POST" action="/results?shop=<%=@current%>" >
       <input type='text' style='min-width=100%;min-height=100%;' name='search' /> 
@@ -124,3 +128,63 @@
 
 </body>
 </html>
+<script type="text/javascript">// Toggle element visibility
+// Show an element
+var show = function (elem) {
+  elem.style.display = 'block';
+};
+
+// Hide an element
+var hide = function (elem) {
+  elem.style.display = 'none';
+};
+var toggle = function (elem) {
+
+  // If the element is visible, hide it
+  if (window.getComputedStyle(elem).display === 'block') {
+    hide(elem);
+    return;
+  }
+
+  // Otherwise, show it
+  show(elem);
+
+};
+
+
+// Listen for click events
+
+var elements = document.getElementsByClassName('toggle');
+  for (var a=0;a<elements.length;a++){
+    var value = elements[a].getAttribute("value");
+    elements[a].addEventListener('click', function (event) {
+    
+
+    // // Make sure clicked element is our toggle
+    // if (!event.target.classList.contains('toggle')) return;
+
+    // Prevent default link behavior
+    event.preventDefault();
+
+    // Get the content
+    var array = document.getElementsByClassName('list');
+    var content = [];
+    for (var x=0;x<array.length;x++){
+      if (!(array[x].className.includes(value))) {
+        content.push(array[x]);
+      }
+    }
+    if (!content) return;
+
+    // Toggle the content
+    for (var y=0;y<content.length;y++){
+      console.log(content[y]);
+      toggle(content[y]);
+    }
+    
+
+  }, false);
+
+
+}
+</script>

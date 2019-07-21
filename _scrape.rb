@@ -16,28 +16,32 @@ def search_scrape(opts={:name=>nil, :word=>nil, :search=>false})
 
   case shop[:provider]
   when 'shopify'
-    results = scrape_shopify(shop) # working for Pops & Ozzy
+    @shop = scrape_shopify(shop) # working for Pops & Ozzy
   when 'wordpress_ecwid'
-    results = scrape_wordpress_ecwid(shop) #needs phantom headless :js (wait etc)
+    @shop = scrape_wordpress_ecwid(shop) #needs phantom headless :js (wait etc)
   when 'bigcartel'
     p 'bigcartel'
-    results = big_cartel_q(shop) # Anorak
+    @shop = big_cartel_q(shop) # Anorak
   when 'wordpress_woocommerce'
-    results = scrape_wordpress_woocommerce(shop) #Novalis
+    @shop = scrape_wordpress_woocommerce(shop) #Novalis / Pushkin
   when 'salesforce'
-    results = scrape_salesforce(shop) #Tate
+    @shop = scrape_salesforce(shop) #Tate
   when 'amazon'
-    results = scrape_amazon(shop) #ZSL
+    @shop = scrape_amazon(shop) #ZSL
   when 'magento'
-    results = scrape_magento(shop) #Kew / V+A
+    @shop = scrape_magento(shop) #Kew / V+A
   when 'custom'
-    results = scrape_custom(shop) #Ethical Kidz
+    @shop = scrape_custom(shop) #Ethical Kidz 
   end
+  p @shop
     
   # write_to(results, {:format=>'json'}) # or 'csv' or 'print'
   # results = opts[:options][:web] ? results : results.to_json
-  p "#{shop[:results][:data].size} results found for #{shop[:name]}"
-  clean_up_results(shop).uniq
+  p "#{@shop[:results][:data].size} results found for #{@shop[:name]}"
+  
+  shop = clean_up_results(@shop)
+  shop = add_categories_to(shop)
+  shop[:results][:data]
 end
 
 def get_data_from_product(shop,product)
@@ -130,37 +134,41 @@ def get_data_from_product(shop,product)
   when "Pushkin Press"
 
     data[:link] = product.attributes['href'].value
-    data[:image] = product.at($shop_css[:img_css]).attributes[$shop_css[:img_source]]
-    data[:title], data[:author] = product.at($shop_css[:img_css]).attributes['alt'].value.split(" by ")
-  
+    data[:image] = product.at($shop_css[:img_css]).attributes[$shop_css[:img_source]].value
+    if product.at($shop_css[:title_css]).attributes.nil? 
+      data[:title]=nil
+    else
+      data[:title], data[:author] = product.at($shop_css[:title_css]).attributes['alt'].value.split(" by ")
+    end
+
   end
 
 
   data
 end
 
-def add_categories_to(shop,d,slug)
-  d[:categories] =  [shop[:opts][:word], slug, shop[:main_keyword]] << d[:title].downcase.split(" ")
-  d[:categories] = d[:categories].flatten.uniq.reject! { |s| s&.strip&.empty? }
-  d
-end
 
 def clean_up_results(shop)
+  p "Clean up results: #{shop[:results][:data].size}"
     results = []
     arr = []
     if shop[:book] && shop[:identifier]!="Kew" #&& !shop[:opts][:web]
-        
+        p "starting"
         shop[:results][:data].each_with_index do |book,i|
           unless book[:link].include?('@')
               arr[i]=Thread.new { 
                 page = Nokogiri::HTML(HTTParty.get(book[:link])) 
+
                 case shop[:identifier] 
                 when "Kew"
                   book = retrieve(book,page,[:description])
                 when "Tate"
                   book = retrieve(book,page,[:author])
                 when "Pushkin Press"
-                  book = retrieve(book,page,[:price,:description,:release_date])
+                  items = [:price,:description,:release_date]
+                  items << :title if book[:title].nil?
+
+                  book = retrieve(book,page,items)
                 end
                 results << book
                 # p book
@@ -168,19 +176,22 @@ def clean_up_results(shop)
           end
         end
         shop[:results][:data] = results
+        p "joining"
         arr.each{|t|t.join}
+        p "joined"
       end
 
-      
-
       # shop[:results][:data].each{|x| ap x} unless shop[:opts][:web]
-      shop[:results][:data]
+      # p shop[:results][:data]
+      shop
 end
 
 def retrieve(book,page,keys=[])
   keys.each do |key|
 
     case key
+    when :title
+      book[:title] = page.at($shop_css[:title_css]).text.nil? ? page.at($shop_css[:secondary_title_css]).text.strip : page.at($shop_css[:title_css]).text.strip
     when :author
       p page.at($shop_css[:author_css])
       book[:author] = page.at($shop_css[:author_css]).text.split("By").last.strip
@@ -199,9 +210,29 @@ def retrieve(book,page,keys=[])
       end
     end
   end
-   
-  book  
+  book
+
 end
+
+def add_categories_to(shop)
+
+  p "Adding categories to #{shop[:name]}"
+  arr = []
+  shop[:results][:data].each_with_index do |book,i|
+    puts "#{i}: #{book[:title]}"
+    slug = book[:slug].nil? ? "" : book[:slug]
+
+    # arr <<  Thread.new {
+      book[:categories] =  [shop[:opts][:word], slug, shop[:main_keyword]] << book[:title].downcase.split(" ")
+      book[:categories] = book[:categories].flatten.uniq.reject! { |s| s&.strip&.empty? }
+   # }
+ end
+
+  # arr.each{|t|t.join}
+  shop
+end
+
+
 
 
 

@@ -32,7 +32,6 @@ def scrape_custom(shop)
             begin
                 puts index
                 @data = get_data_from_product(shop,product)
-                @data = add_categories_to(shop,@data)
                 shop[:results][:data] << @data
                 p @data
                  
@@ -49,6 +48,7 @@ def scrape_custom(shop)
   end
   
   shop[:results][:data].flatten.uniq
+  shop
 end
 
 def scrape_magento(shop)
@@ -96,7 +96,7 @@ def scrape_magento(shop)
      
             begin
                 @data = get_data_from_product(shop,product)
-                @data = add_categories_to(shop,@data,slug)
+                @data[:slug]=slug
                 shop[:results][:data] << @data
                 p @data
                  
@@ -136,6 +136,7 @@ def scrape_magento(shop)
       end
 
     shop[:results][:data].flatten.uniq
+    shop
 end
 
 
@@ -154,7 +155,6 @@ def scrape_amazon(shop)
     html.css($shop_css[:product_css]).each_with_index do |product, index|
          begin
                 @data = get_data_from_product(shop,product)
-                @data = add_categories_to(shop,@data)
                 shop[:results][:data] << @data
                 p @data
                  
@@ -191,7 +191,7 @@ def scrape_amazon(shop)
 
     end
 
-    shop[:results][:data]
+    shop
 
 end
 
@@ -221,7 +221,6 @@ def scrape_salesforce(shop) #Tate
       html.css($shop_css[:product_css]).each_with_index do |product, index|
          begin
                 @data = get_data_from_product(shop,product)
-                @data = add_categories_to(shop,@data)
                 shop[:results][:data] << @data
                 p @data
                  
@@ -260,7 +259,7 @@ def scrape_salesforce(shop) #Tate
 
     end
 
-    shop[:results][:data]
+    shop
 end
 
 def scrape_wordpress_woocommerce(shop) #working for Novalia, not yet for Pushkin Press
@@ -278,14 +277,13 @@ def scrape_wordpress_woocommerce(shop) #working for Novalia, not yet for Pushkin
           begin
                 puts index
                 @data = get_data_from_product(shop,product)
-                @data = add_categories_to(shop,@data)
                 shop[:results][:data] << @data
                 p @data
                  
           rescue  StandardError => e
                 # p "Problem = #{@problem}" unless @problem.empty?
                 p @data
-                next
+                raise e
  
           end
       end
@@ -303,7 +301,7 @@ def scrape_wordpress_woocommerce(shop) #working for Novalia, not yet for Pushkin
   end
 
   # p shop[:results][:data]
-  shop[:results][:data]
+  shop
 
     
 end
@@ -332,7 +330,6 @@ def scrape_shopify(shop)
       begin
 
         @data = get_data_from_product(shop,product)
-        @data = add_categories_to(shop,@data)
         shop[:results][:data] << @data
         p @data
 
@@ -353,8 +350,7 @@ def scrape_shopify(shop)
     shop[:incomplete] = false
   end
 
-  p shop[:results][:data]
-  shop[:results][:data]
+  shop
 end
 
 def scrape_wordpress_ecwid(shop)

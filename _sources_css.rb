@@ -72,6 +72,7 @@ CSS = {
                     :link_css =>nil,
                     :desc_css=>'div.woocommerce-product-details__short-description p',
                     :title_css => 'div.taxpage img',
+                    :secondary_title_css => 'h1.product_title',
                     :img_source =>'src' ,
                     :pagination_css=> nil
             }

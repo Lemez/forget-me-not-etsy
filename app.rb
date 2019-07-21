@@ -15,12 +15,28 @@ class App < Sinatra::Base
      erb :friends, :locals => {:friends => @friends}
   end
 
+  get '/edit' do
+    @friend = Friend.find(params[:id])
+    p @friend
+    erb :edit, :locals => {:friend => @friend}
+
+  end
+
+  post '/save_edit' do
+    fr = Friend.find(params[:friend][:id].to_i)
+    fr.attributes = params[:friend]
+    words = fr.keywords.split(",")
+    fr.keywords =words.map!{|w|w.strip}
+    fr.save!
+    redirect '/'
+  end
+
   post '/add' do
-     fr = Friend.new(params[:friend])
-     words = fr.keywords.split(",")
-     fr.keywords =words.map!{|w|w.strip}
-     fr.save!
-     redirect '/'
+    fr = Friend.new(params[:friend])
+    words = fr.keywords.split(",")
+    fr.keywords =words.map!{|w|w.strip}
+    fr.save!
+    redirect '/'
   end
 
   get '/add' do

@@ -3,17 +3,10 @@
       <% @lastshop='' %>
      <% @results.each do |item| %>
 
-
-      <% if item['shop'] == 'Etsy' %>
-        <% @name = item['shop']%>
-        <% @image = item['Images'].first['url_570xN']%>
-        <% @link = item['link'] %>
-        <% @price = item['price'] %>
+      <% if item[:shop] == 'Etsy' %>
+        <% @image = item[:images].first['url_570xN']%>
       <% else %>
          <% @image = item[:image] %>
-         <% @link = item[:link] %>
-         <% @price = item[:price] %>
-          <% @name = item[:shop]%>
       <% end %>
 
     <!-- image with link -->
@@ -27,20 +20,14 @@
       <img class='results-icon' src="<%=BACKUP_PRODUCT_IMAGES[item[:shop]]%>" />
     <a class='results' href="<%=@link%>" target="_blank">
 
-    
-      
-        
           <img class='img_result' src="<%=@image%>" />      
-       
 
-        
           <h2>
              <span style='font-weight=700;'><%= @price %> </span>
             <%= item['currency']%>
           </h2>
         
-       
-          <% if item['shop'] == 'Etsy' %>
+          <% if item[:shop] == 'Etsy' %>
            
            <p>Delivered in 
             <span style='font-weight=700;'><%=item['from']%></span> to
@@ -50,16 +37,17 @@
          <% end %>
        
 
-         <% if item['shop'] == 'Etsy' %>
+         <% if item[:shop] == 'Etsy' %>
          
-            <% item["data"].each_pair do |k,v| %>
+            <% item[:data].each_pair do |k,v| %>
                 <p><%=v%></p>
             <% end %>
          
           <% else %>
+
             <h4><%=item[:title]%></h4>  
             <% if not item[:author].nil? %>
-            <p class='grid_bottom'><%=item[:author]%></p>  
+              <p class='grid_bottom'><%=item[:author]%></p>  
             <% end %>
           <% end %>
 

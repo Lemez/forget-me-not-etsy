@@ -1,3 +1,8 @@
+TO DO: optimise page loading with scroll based mechanism to check if
+- loading has completed
+- add latest page results to results so far
+
+
 not working: 
 404
 

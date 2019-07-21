@@ -123,24 +123,24 @@ def  parse_results(results,opts,fields_to_save)
   else
 
   results['results'].each_with_index do |item,index|
-    images ||=item["Images"]
-    proc_min ||=item["processing_min"]
-    proc_max ||=item["processing_max"]
-    price = item['price']
-    currency = item['currency_code']
+    images ||=item[:images]
+    proc_min ||=item[:processing_min]
+    proc_max ||=item[:processing_max]
+    price = item[:price]
+    currency = item[:currency_code]
     listing = {
-       "Images"=>images,
-       "link"=>item['url'],
-       'from'=>proc_min,
-       'to'=>proc_max,
-       'price'=>price,
-       'currency'=>currency,
-       'shop'=>'Etsy',
-       "data"=>{}
+       :images=>images,
+       :link=>item[:url],
+       :from=>proc_min,
+       :to=>proc_max,
+       :price=>price,
+       :currency=>currency,
+       :shop=>'Etsy',
+       :data=>{}
     }
 
       item.each_pair do |k,v|
-        listing["data"][k]=v if fields_to_save.include?(k)
+        listing[:data][k]=v if fields_to_save.include?(k)
       end
       @returned_results << listing
 

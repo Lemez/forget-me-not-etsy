@@ -1,0 +1,12 @@
+ <% @birthday= @friend.birthday.strftime("%Y-%m-%d") %>
+<% @keywords = @friend.keywords.join(", ")%>
+
+  <h1>Edit Friend</h1>
+  <form action="/save_edit" method="POST">
+    <div class='box'><input type="hidden" value="<%=@friend.id%>" name='friend[id]'/></div>
+   <div class='box'> <input type="text" value="<%=@friend.firstname%>" placeholder='First name' name='friend[firstname]'/></div>
+   <div class='box'> <input type="text" value="<%=@friend.lastname%>" placeholder='Last name' name='friend[lastname']/></div> 
+   <div class='box'> <input type="date" value="<%=@birthday%>" name='friend[birthday]'/></div>
+   <div class='box'>  <input type="text" value="<%=@keywords%>" placeholder="Interests (comma separated)" name='friend[keywords]'/></div>
+   <input type='submit'/>
+  </form>
